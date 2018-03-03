@@ -1,0 +1,155 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+    <!--
+    wbf1	date	Date		1	wbf	-100	date
+    wbf2	timepoint	Time point (in hours)		1	wbf	-100	time
+    wbf2	scheduledtime	Scheduled time(in hours)		1	wbf	-100	time
+    wbf2	subjectidverified	Subject ID verified		1	wbf	-100	multiple
+    wbf2	subjectfeeling	Subject feeling well yes or no		1	wbf	-100	list-radio
+    wbf2	actualtime	Actual time (in hours)		1	wbf	-100	time
+    wbf2	doneby	Done by		1	wbf	-100	text
+    -->
+    {{#partial head1}}
+    <div>
+        <div>
+            <h4 class="ac-sub-h4">{{name}}</h4>
+        </div>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>{{head.date.text}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{items[0].date}}" /></td>
+            </tr>
+        </table>
+    </div>
+    {{/partial}}
+    {{#partial content1}}
+    <div>
+        <table class="ac-table">
+            <thead>
+                <tr>
+                    <th>
+                        {{head.timepoint.text}}
+                    </th>
+                    <th>
+                        {{head.scheduledtime.text}}
+                    </th>
+                    <th>
+                        {{head.subjectidverified.text}}
+                    </th>
+                    <th>
+                        {{head.subjectfeeling.text}}
+                    </th>
+                    <th>
+                        {{head.actualtime.text}}
+                    </th>
+                    <th>
+                        {{head.doneby.text}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each items:i}}
+                <tr>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{timepoint}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{scheduledtime}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{subjectidverified}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{subjectfeeling}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{actualtime}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{doneby}}" />
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/partial}}
+    {{#page.formGroup}}
+    {{#wbf1}}
+    <div>
+        {{> head1}}
+    </div>
+    {{/wbf1}}
+    {{#wbf2}}
+    <div>
+        {{> content1}}
+    </div>
+    {{/wbf2}}
+    {{#wbf3}}
+    <div>
+        {{> head1}}
+    </div>
+    {{/wbf3}}
+    {{#wbf4}}
+    <div>
+        {{> content1}}
+    </div>
+    {{/wbf4}}
+    {{#wbf5}}
+    <div>
+        {{> head1}}
+    </div>
+    {{/wbf5}}
+    {{#wbf6}}
+    <div>
+        {{> content1}}
+    </div>
+    {{/wbf6}}
+    {{#wbf7}}
+    <div>
+        {{> head1}}
+    </div>
+    {{/wbf7}}
+    {{#wbf8}}
+    <div>
+        {{> content1}}
+    </div>
+    {{/wbf8}}
+    {{#wbf9}}
+    <div>
+        {{> head1}}
+    </div>
+    {{/wbf9}}
+    {{#wbf10}}
+    <div>
+        {{> content1}}
+    </div>
+    {{/wbf10}}
+    {{#wbf99}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('comments', 'wbf99')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'wbf99')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'wbf99')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewedby', 'wbf99')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedby', 0, 'wbf99')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedbyrole', 0, 'wbf99')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/wbf99}}
+    {{/page.formGroup}}
+</script>
+

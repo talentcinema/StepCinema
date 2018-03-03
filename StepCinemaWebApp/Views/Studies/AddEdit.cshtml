@@ -1,0 +1,67 @@
+﻿@model CRFModels.Models.StudiesEditModel
+@{
+    Layout = "~/Views/Shared/_AddEditLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".divBackColor").css("height", screen.height - 230 + "px");
+        var selectedVal = @Html.Raw(Json.Encode(Model.NoOfPeriods));
+        if (selectedVal != 0) {
+            $("#periods").val(selectedVal);
+        }
+    });
+</script>
+<div class="table-bordered titleHeader" style="margin-top:50px;">
+    <div>
+        <h3>@((string.IsNullOrEmpty(Model.StudyNumber)) ? "Add Studies" : "Edit Studies")</h3>
+    </div>
+</div>
+<div class="divBackColor">
+    <div class="col-md-4 col-md-offset-4 table-bordered" style="background-color:white">
+        <div>
+            <div class="form-group">
+                <h3 class="subTitle">Enter Study Details</h3>
+            </div>
+            <div class="text-primary">
+                @ViewBag.Message
+            </div>
+            @using (Html.BeginForm(new { periods = "" }))
+            {
+                @Html.HiddenFor(x => x.StudyId);
+                <div class="form-group">
+                    @Html.LabelFor(x => x.StudyNumber)
+                    @Html.TextBoxFor(x => x.StudyNumber, new { @class = "form-control" })
+                    <div class="text-danger text-right small">
+                        @Html.ValidationMessageFor(x => x.StudyNumber)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.StudyName)
+                    @Html.TextBoxFor(x => x.StudyName, new { @class = "form-control" })
+                    <div class="text-danger text-right small">
+                        @Html.ValidationMessageFor(x => x.StudyName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.NoOfPeriods)
+                    @Html.DropDownList("periods", ViewData["periodList"] as IEnumerable<SelectListItem>)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Active)
+                    @Html.CheckBoxFor(x => x.Active)
+                    <div class="text-danger text-right small">
+                        @Html.ValidationMessageFor(x => x.Active)
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <a href="@Url.Action("List")" class="btn btn-default">Cancel</a>
+                    <button class="btn btn-primary" type="submit">@((string.IsNullOrEmpty(Model.StudyNumber)) ? "Save" : "Update")</button>
+                </div>
+            }
+        </div>
+        <div class="form-group"></div>
+    </div>
+</div>

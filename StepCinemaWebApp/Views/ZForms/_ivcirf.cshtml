@@ -1,0 +1,75 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+
+    <!--
+
+    ivcirf1	slno	Sl. No.		1	ivcirf	-100	text
+    ivcirf1	subjectidverified	Subject ID verified 		1	ivcirf	-100	multiple
+    ivcirf1	dateandtime	Date and time of cannula insertion		1	ivcirf	-100	datetime
+    ivcirf1	doneby	done by(sign and date)		1	ivcirf	-100	text
+    ivcirf1	subjectidverified	Subject ID verified 		1	ivcirf	-100	multiple
+    ivcirf1	dateandtime	Date and time of cannula removal		1	ivcirf	-100	datetime
+    ivcirf1	doneby	done by(sign and date)		1	ivcirf	-100	text
+    ivcirf2	comments	Comments if any		1	ivcirf	-100	text
+    ivcirf2	commentsmarked	Mark the box, if additional comments are made		1	ivcirf	-100	multiple
+    ivcirf2	reviewedby	Reviewed by		1	ivcirf	-100	text
+    ivcirf2	reviewedbyrole	Reviewed by role		1	ivcirf	-100	list-radio
+
+            -->
+    {{#page.formGroup}}
+    {{#ivcirf1}}
+    <div>
+        <h4 class="ac-sub-h4">{{name}}</h4>
+    </div>
+    <table style="width:100%" class="ac-table">
+        <thead>
+            <tr>
+                <th>{{head.slno.text}}</th>
+                <th>{{head.subjectidverified1.text}}</th>
+                <th>{{head.dateandtime1.text}}</th>
+                <th>{{head.doneby1.text}}</th>
+                <th>{{head.subjectidverified2.text}}</th>
+                <th>{{head.dateandtime2.text}}</th>
+                <th>{{head.doneby2.text}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each items:i}}
+            <tr>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{slno}}" /></td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{subjectidverified1}}" /></td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{dateandtime1}}" /></td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{doneby1}}" /></td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{subjectidverified2}}" /></td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{dateandtime2}}" /></td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{doneby2}}" /></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/ivcirf1}}
+    {{#ivcirf2}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('comments', 'ivcirf2')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'ivcirf2')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'ivcirf2')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewedby', 'ivcirf2')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedby', 0, 'ivcirf2')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedbyrole', 0, 'ivcirf2')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/ivcirf2}}
+    {{/page.formGroup}}
+</script>

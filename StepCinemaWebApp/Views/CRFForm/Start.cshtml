@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_SessionLayout.cshtml";
+}
+@Html.Partial("~/Views/Shared/_PageStyles.cshtml")
+<style type="text/css">
+    .ac-crf-table  { border-collapse: collapse; margin:10px auto; }
+    .ac-crf-table td { border: 1px solid #ccc; padding: 4px; }
+</style>
+<h3 class="text-center">CASE REPORT FORM</h3>
+<hr class="ac-main-hr" />
+<div data-detail="@ViewBag.DetailsId" data-next="@ViewBag.NavData.NextPage" data-period="@ViewBag.NavData.NextPeriod" id="startArea">
+</div>
+<script type="text/html" id="startTemplate">
+    <div>
+        {{#data}}
+        <table class="ac-crf-table">
+            <tr>
+                <td>
+                    <label>Study Number : </label>
+                </td>
+                <td>
+                    <input type="text" class="ac-input" value="{{ studyNumber }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Site Id : </label>
+                </td>
+                <td>
+                    <input type="text" class="ac-input" value="{{ siteId }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Subject Number : </label>
+                </td>
+                <td>
+                    <input type="text" class="ac-input" value="{{ subjectId }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Screening Number : </label>
+                </td>
+                <td>
+                    <input type="text" class="ac-input" value="{{ screeningNo }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Registration Number : </label>
+                </td>
+                <td>
+                    <input type="text" class="ac-input" value="{{ registeredNo }}" />
+                </td>
+            </tr>
+        </table>
+        <div class="ac-fullcontent">
+            <label>Protocol Title : </label>
+            <textarea value="{{ protocolTitle }}" class="ac-input ac-textarea"></textarea>
+        </div>
+        <div style="margin: 20px 0" class="text-right">
+            <a class="btn btn-default" href="@Url.Action("List", "CRFStatus", new { id = ViewBag.StudyId })">Cancel</a>
+            <button class="btn btn-primary" type="button" on-click="['onClick']">Save</button>
+        </div>
+        {{/data}}
+    </div>
+</script>
+@section scripts {
+    <script src="~/Scripts/custom/start.page.js"></script>
+}

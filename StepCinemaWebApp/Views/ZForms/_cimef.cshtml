@@ -1,0 +1,171 @@
+﻿<script type="text/html" id="templateforpage" data-tag="scr" data-vaid-values="sub,scr,reg,none">
+    <!--
+    cimef1	dateandtime	Date and time		1	cimef	-100	datetime
+    cimef1	subjectid	Subject ID verified		1	cimef	-100	list-radio
+    cimef2	pulse	Pulse		1	cimef	-100
+    cimef2	bloodpressure	Blood pressure		1	cimef	-100
+    cimef2	bloodpressure2	Blood pressure		1	cimef	-100
+    cimef2	oraltemperature	Oral temperature		1	cimef	-100
+    cimef3	signs	Signs		1	cimef	-100	static
+    cimef3	presentabsent	Present or Absent		1	cimef	-100	list-radio  corrected
+    cimef4	slno	SL No		1	cimef	-100	static
+    cimef4	system	System		1	cimef	-100	static
+    cimef4	normal	Normal		1	cimef	-100	text corrected
+    cimef4	abnormal	Abnormal		1	cimef	-100	text
+    cimef4	comments	Comments		1	cimef	-100	text
+    cimef5	commentsifany	Comments if any		1	cimef	-100	text
+    cimef5	doneby	Done By (sign and date)		1	cimef	-100	text
+    cimef5	commentsmarked	Mark the box, if additional comments are made.		1	cimef	-100	multiple
+    cimef5	reviewby	Reviewed by		1	cimef	-100	text
+    cimef5	reviewbyrole      	Reviewed by role		1	cimef	-100	list-radio
+        -->
+    {{#page.formGroup}}
+    {{#cimef1}}
+    <div>
+        <h4 class="ac-sub-h4">{{name}}</h4>
+    </div>
+    <div>
+        <table>
+            <colgroup>
+                <col style="width:300px" />
+                <col />
+            </colgroup>
+            <tr>
+                <td>
+                    {{~/text('dateandtime', 'cimef1')}}
+                </td>
+                <td>
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('dateandtime', 0, 'cimef1')}}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{~/text('subjectid', 'cimef1')}}
+                </td>
+                <td>
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectid', 0, 'cimef1')}}" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    {{/cimef1}}
+    {{#cimef2}}
+    <div>
+        <div>
+            <h4 class="ac-sub-h4">{{name}}</h4>
+        </div>
+        <div>
+            <table style="width:100%">
+                <colgroup>
+                    <col style="width:300px" />
+                    <col />
+                </colgroup>
+                <tr>
+                    <td>
+                        {{~/text('pulse', 'cimef2')}}
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('pulse', 0, 'cimef2')}}" /> <span>{{~/field('pulse', 0, 'cimef2').unit}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{~/text('bloodpressure', 'cimef2')}}
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('bloodpressure', 0, 'cimef2')}}" /> /
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('bloodpressure2', 0, 'cimef2')}}" /> <span>{{~/field('bloodpressure', 0, 'cimef2').unit}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{~/text('oraltemperature', 'cimef2')}}
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('oraltemperature', 0, 'cimef2')}}" />
+                        <span>{{~/field('oraltemperature', 0, 'cimef2').unit}}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {{/cimef2}}
+    {{#cimef3}}
+    <div>
+        <div>
+            <h4 class="ac-sub-h4">{{name}}</h4>
+        </div>
+        <div>
+            <table class="ac-table">
+                <thead>
+                    <tr>
+                        <th>{{~/text('signs', 'cimef3')}}</th>
+                        <th>{{~/text('presentabsent', 'cimef3')}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each ~/items('cimef3'):i}}
+                    <tr>
+                        <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('signs', i, 'cimef3')}}" /></td>
+                        <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('presentabsent', i, 'cimef3')}}" /></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{/cimef3}}
+    {{#cimef4}}
+    <div>
+        <div>
+            <h4 class="ac-sub-h4">{{name}}</h4>
+        </div>
+        <div>
+            <table class="ac-table">
+                <thead>
+                    <tr>
+                        <th>{{~/text('slno', 'cimef4')}}</th>
+                        <th>{{~/text('system', 'cimef4')}}</th>
+                        <th>{{~/text('normalabnormal', 'cimef4')}}</th>
+                        <th>{{~/text('comments', 'cimef4')}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each ~/items('cimef4'):i}}
+                    <tr>
+                        <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('slno', i, 'cimef4')}}" /></td>
+                        <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('system', i, 'cimef4')}}" /></td>
+                        <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('normalabnormal', i, 'cimef4')}}" /></td>
+                        <td class="ac-smallcontent"><acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', i, 'cimef4')}}" /></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{/cimef4}}
+    {{#cimef5}}
+    <div>
+        <div>
+            <div>
+                {{~/text('doneby', 'cimef5')}} &nbsp; <acinput lovs="{{~/page.lovs}}" field="{{~/field('doneby', 0, 'cimef5')}}" />
+            </div>
+            <div>
+                {{~/text('commentsifany', 'cimef5')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsifany', 0, 'cimef5')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'cimef5')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewby', 'cimef5')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewby', 0, 'cimef5')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewbyrole', 0, 'cimef5')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/cimef5}}
+    {{/page.formGroup}}
+</script>

@@ -1,0 +1,104 @@
+﻿@model CRFModels.Models.PrefilledFieldsEditModel
+
+<h1>Pre Filled Fields data</h1>
+<div class="col-md-12">
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(x => x.FormId)
+            @Html.HiddenFor(x => x.FormGroupId)
+            @Html.HiddenFor(x => x.PeriodId)
+            @Html.HiddenFor(x => x.StudyId)
+            @Html.HiddenFor(x => x.ListPrefilledFields)
+            <div class="form-group" style="height:250px;overflow:auto;">
+                <table class="table-bordered" id="tblPreFill" style="min-width:30%" align="center">
+                    <thead>
+                        <tr>
+                            @{ foreach (var item in Model.ListFieldId)
+                                {
+                                    <th class="text-center">@item</th>
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ for (int rowCount = 1; rowCount <= Model.NoOfRows; rowCount++)
+                            {
+                                <tr id="@rowCount" class="text-center">
+                                    @{
+                                        var itemdata = Model.ListPrefilledFields.Where(x => x.RowIndex == rowCount).OrderBy(x => x.FieldId);
+                                        foreach (var fieldId in Model.ListFieldId)
+                                        {
+                                            var fieldVale = itemdata.Where(x => x.FieldId == fieldId).Select(x => x.FieldValue).FirstOrDefault();
+                                            <td>@Html.TextBox(fieldId + rowCount, fieldVale)</td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div align="center">
+                    <br />
+                    <label id="status" style="color:orangered"></label>
+                </div>
+            </div>
+            <div class="text-right col-md-11">
+                <button class="btn btn-default" type="button" onclick="hideModel()">Close</button>
+                <button class="btn btn-primary" type="button" onclick="formSubmit()">Save</button>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    function hideModel() {
+        $("#myModal").css("display", "none");
+    }
+
+    function formSubmit() {
+        var trCount = 1;
+        var preFill = [];
+        var col = @Html.Raw(Json.Encode(Model.ListFieldId));
+        ///read preFill table
+        $('#tblPreFill tbody tr').each(function () {
+            //var colValue = $(this).find("td input").eq(0)[0].value;
+            $(col).each(function (key, val) {
+                //debugger
+                var formId = $("#FormId").val();
+                var fieldId = val;
+                var formGroupId = $("#FormGroupId").val();
+                var periodId = $("#PeriodId").val();
+                var studyId = $("#StudyId").val();
+                var txtId = '#'+val+trCount;
+                var feildValue = $(txtId).val();
+                var rowIndex = trCount;
+                preFill.push({
+                    FormId: formId,
+                    FieldValue: feildValue,
+                    FieldId: fieldId,
+                    PeriodId: periodId,
+                    FormGroupId: formGroupId ,
+                    StudyId: studyId,
+                    RowIndex: rowIndex,
+                })
+            });
+            $("#ListPrefilledFields").val(JSON.stringify(preFill));
+            trCount++;
+        });
+        var prefilledFieldsList = JSON.stringify(preFill);
+        //debugger
+        $.ajax({
+            url: '@Url.Action("PreFilledFiled")',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: prefilledFieldsList,
+                error: function (xhr) {
+                    //debugger
+                }
+            }).done(function (result) {
+                $("#status").html(result);
+                //$('#divModel').html(result);
+            });
+    }
+</script>

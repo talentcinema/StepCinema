@@ -1,0 +1,73 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+
+    <!--
+
+    a120waf1	scheduledtime	Scheduled time of water administration		1	a120waf1	-100	static
+    a120waf1	onehourpostdose	Scheduled time of water administration 1 hour post dose		1	a120waf1	-100	static
+    a120waf1	twohourpostdose	Scheduled time of water administration 2 hour post dose		1	a120waf1	-100	static
+    a120waf2	comments	Comments if any		1	a120waf1	-100	text
+    a120waf2	commentsmarked	Mark the box, if additional comments are made.		1	a120waf1	-100	multiple
+    a120waf2	reviewedby	Reviewed by		1	a120waf1	-100	text
+    a120waf2	reviewedbyrole	Reviewed by role		1	a120waf1	-100	list-radio
+
+        -->
+    {{#page.formGroup}}
+    {{#a120waf1}}
+    <div>
+        <h4 class="ac-sub-h4">{{name}}</h4>
+    </div>
+    <div>
+        <table class="ac-table">
+            <colgroup>
+                <col />
+                <col />
+                <col />
+                <col />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>{{~/text('scheduledtime', 'a120waf1')}}</th>
+                    <th>{{~/text('subjectidverified', 'a120waf1')}}</th>
+                    <th>{{~/text('actualdatetime', 'a120waf1')}}</th>
+                    <th>{{~/text('doneby', 'a120waf1')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ~/items('a120waf1'):i}}
+                <tr>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('scheduledtime', i, 'a120waf1')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectidverified', i, 'a120waf1')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('actualdatetime', i, 'a120waf1')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('doneby', i, 'a120waf1')}}" /></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/a120waf1}}
+    {{#a120waf2}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('comments', 'a120waf2')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'a120waf2')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'a120waf2')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewedby', 'a120waf2')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedby', 0, 'a120waf2')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedbyrole', 0, 'a120waf2')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/a120waf2}}
+    {{/page.formGroup}}
+</script>

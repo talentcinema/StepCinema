@@ -1,0 +1,74 @@
+﻿
+body {
+    background-color: white;
+    color: #333;
+}
+
+body.ac-dark-section { 
+    background-color: rgb(54,70,93);
+    color :white;
+    padding: 10px;
+    text-align:center;
+}
+    body.ac-dark-section .ac-section {
+        display: block;
+        color: #333;
+        background-color: #fff;
+        margin: 20px auto;
+        padding: 10px;
+        text-align: center;
+        width: 300px;
+    }
+
+.ac-login-area {
+    padding:30px;
+}
+    .ac-login-area .ac-form-cell2 {
+        margin: 6px;
+    }
+        .ac-login-area .ac-form-cell2 button,
+        .ac-login-area .ac-form-cell2 label {
+            border-radius: 0;
+            font-weight: normal;
+        }
+    .ac-login-area .ac-form-cell {
+        margin: 6px;
+        border: 1px solid #ccc;
+    } 
+    .ac-login-area .ac-form-cell input,
+    .ac-login-area .ac-form-cell .input-group-addon {
+        border: none;
+        background-color: white;
+        border-radius: 0;
+    }
+
+@media(min-width:768px) {
+    body.ac-dark-section .container {
+        max-width: 850px;
+    }
+    body.ac-dark-section .ac-section {
+        display: table;
+        table-layout: fixed;
+        padding: 0;
+        margin: 20px auto;
+        width: 90%;
+        empty-cells:show;
+        min-height: 500px;
+    }
+    .ac-section-row {
+        display:table-row;
+    }
+    .ac-section-msg-area {
+        display: table-cell;
+        width: 50%;
+    }
+    .ac-section-img-area {
+        display: table-cell;
+        width: 50%;
+    }
+    body.ac-dark-section .ac-login-section .ac-section-img-area {
+        background: #fff center center url("Images/Clinic.jpg") no-repeat;
+        background-size: cover;
+    }
+
+}

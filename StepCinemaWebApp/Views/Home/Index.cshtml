@@ -1,0 +1,49 @@
+﻿@model CRFModels.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
+    ViewBag.SectionClass = "ac-login-section";
+}
+<div class="ac-login-area">
+    <h3>
+        Welcome to Talent Show
+    </h3>
+    <div style="height:60px;">
+        @ViewBag.Message
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-xs-12">
+                @using (Html.BeginForm("Index", "Home"))
+                {
+                    <div class="input-group ac-form-cell">
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    </div>
+                    <div class="input-group ac-form-cell">
+                        @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    </div>
+                    <div class="ac-form-cell2 text-left">
+                        <label>
+                            @Html.CheckBoxFor(x => x.RememberMe)
+                            <span>
+                                Keep me logged in
+                            </span>
+                        </label>
+                    </div>
+                    <div class="ac-form-cell2">
+                        <button class="btn btn-primary btn-block" type="submit">Login</button>
+                    </div>
+                    <div class="ac-form-cell2">
+                        <a href="@Url.Action("ForgotPassword", "Home")">Forgot your password</a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div style="height:60px;">
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,129 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+    <!--
+
+    robs1	sampleunderlight	Blood sampling done under yellow monochromatic light		1	robs	-100	list-radio
+    robs1	specimen	Specimen: Blood;   		1	robs	-100	static
+    robs1	volume	Volume: 4 mL / draw		1	robs	-100	static
+    robs1	vacutainers	Vacutainers pre-chilled		1	robs	-100	list-radio
+    robs1	matrixextracted	Matrix to be extracted: Plasma/ Serum/ Whole blood/ Others____________		1	robs	-100	multiple
+    robs1	matrixextractedtext	Matrix to be extracted:Others____________		1	robs	-100	text
+    robs1	anticoagulant	Type of anticoagulant: K2EDTA / K3EDTA 		1	robs	-100	list-radio
+    robs1	anticoagulanttext	Type of anticoagulant: others		1	robs	-100	text
+    robs2	time	Time point (in hours)		1	robs	-100	time
+    robs2	scheduledtimestatic	Scheduled Time of Blood Collection		1	robs	-100	static
+    robs2	scheduledtime	Scheduled time		1	robs	-100	time
+    robs2	changetime	change in scheduled time		1	robs	-100	time
+    robs2	subjectidverified	Subject id verified		1	robs	-100	multiple
+    robs2	actualtimestatic	Actual Time of Blood Collection		1	robs	-100	static
+    robs2	actualtime	Actual time and date		1	robs	-100	time
+    robs2	deviationinmin	deviation in minutes		1	robs	-100	time
+    robs2	reasonfordeviation	Reason for deviation		1	robs	-100	text
+    robs2	doneby	done by(sign and date)		1	robs	-100	text
+    robs3	code	Code: A - Cannula Block, B - Recannulation done, C - Subject reported late, D - Others 		1	robs	-100	static
+
+        -->
+    {{#page.formGroup}}
+    {{#robs1}}
+    <div>
+        <div>
+            <h4 class="ac-sub-h4">{{name}}</h4>
+        </div>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>{{head.sampleunderlight.text}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{items[0].sampleunderlight}}" /></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>{{head.specimen.text}}{{head.volume.text}}{{head.vacutainers.text}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{items[0].vacutainers}}" /></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>{{head.matrixextracted.text}}&nbsp;</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{items[0].matrixextracted}}" /></td>
+                <td>{{head.matrixextractedtext.text}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{items[0].matrixextractedtext}}" /></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>{{head.anticoagulant.text}}&nbsp;</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{items[0].anticoagulant}}" /></td>
+                <td>{{head.anticoagulanttext.text}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{items[0].anticoagulanttext}}" /></td>
+            </tr>
+        </table>
+    </div>
+    {{/robs1}}
+    {{#robs2}}
+    <div>
+        <table class="ac-table">
+            <thead>
+                <tr>
+                    <th rowspan="2">{{~/text('time', 'robs2')}}</th>
+                    <th colspan="2">{{~/text('scheduledtimestatic', 'robs2')}}</th>
+                    <th rowspan="2">{{~/text('subjectidverified', 'robs2')}}</th>
+                    <th colspan="4">{{~/text('actualtimestatic', 'robs2')}}</th>
+                </tr>
+                <tr>
+                    <th>{{~/text('scheduledtime', 'robs2')}}</th>
+                    <th>{{~/text('changetime', 'robs2')}}</th>
+                    <th>{{~/text('actualtime', 'robs2')}}</th>
+                    <th>{{~/text('deviationinmin', 'robs2')}}</th>
+                    <th>{{~/text('reasonfordeviation', 'robs2')}}</th>
+                    <th>{{~/text('doneby', 'robs2')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ~/items('robs2'):i}}
+                <tr>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('time', i, 'robs2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('scheduledtime', i, 'robs2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('changetime', i, 'robs2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectidverified', i, 'robs2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('actualtime', i, 'robs2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('deviationinmin', i, 'robs2')}}" /></td>
+                    <td class="ac-smallcontent"><acinput lovs="{{~/page.lovs}}" field="{{~/field('reasonfordeviation', i, 'robs2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('doneby', i, 'robs2')}}" /></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/robs2}}
+    {{#robs3}}
+    <div>
+        <span>{{head.code.text}}</span><acinput lovs="{{~/page.lovs}}" field="{{~/field('code', 0, 'robs3')}}" />
+    </div>
+    {{/robs3}}
+    {{#robs4}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('comments', 'robs4')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'robs4')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'robs4')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewedby', 'robs4')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedby', 0, 'robs4')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedbyrole', 0, 'robs4')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/robs4}}
+    {{/page.formGroup}}
+</script>

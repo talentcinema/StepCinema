@@ -1,0 +1,68 @@
+﻿@model List<string>
+@{
+    Layout = "~/Views/Shared/_SessionLayout.cshtml";
+    ViewBag.Title = "Users List";
+}
+
+<h2 class="ac-table-h1">Sites</h2>
+
+<div id="sitestable">
+
+</div>
+<div id="addeditpopup">
+    <div class="ac-popup">
+
+    </div>
+    <div class="ac-layer">
+
+    </div>
+</div>
+<script type="text/html" id="addedit">
+
+</script>
+<script type="text/html" id="fulltable">
+    <datatable tabledata="{{tabledata}}" editTitle="" editWidth="70px">
+        {{#partial filterArea}}
+        <form>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Site Name</label>
+                            <input type="text" value="{{filter.siteId}}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" value="{{filter.siteName}}" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group text-left">
+                        <label style="display:block">&nbsp;</label>
+                        <button type="button" class="btn btn-default" on-click="[ 'onFilter', filter ]">Apply</button>
+                        <a href="@Url.Action("AddEdit")" class="btn btn-default">Add New</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {{/partial}}
+        {{#partial editArea}}
+        <div>
+            <a href="{{ '@Url.Action("AddEdit")' + '/' + rowValue.siteId }}" style="cursor:pointer;text-decoration:none;">&nbsp;<i class="text-primary glyphicon glyphicon-pencil"></i>&nbsp;</a>
+        </div>
+        {{/partial}}
+        {{#partial listCaption}}
+        <div style="padding-top:6px;">
+            Users list
+        </div>
+        {{/partial}}
+    </datatable>
+</script>
+
+@section scripts {
+    @Html.Partial("~/Views/Shared/_DataTable.cshtml")
+    <script type="text/javascript" src="~/Scripts/custom/sites.list.js"></script>
+}

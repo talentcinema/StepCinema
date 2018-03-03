@@ -1,0 +1,102 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+    {{#page.formGroup}}
+        <div>
+            {{#dayzero}}
+                <div>
+                    <h4 class="ac-sub-h4">{{name}}</h4>
+                </div>
+                <div>
+                    <span>{{head.date.text}}</span><acinput lovs="{{~/page.lovs}}" field="{{items[0].date}}" />
+                </div>
+            {{/dayzero}}
+            {{#dayzerogrid}}
+                <div>
+                    <table class="ac-table">
+                        <thead>
+                            <tr>
+                                <th>{{head.mealspermenu.text}}</th>
+                                <th>{{head.mealsstarttime.text}}</th>
+                                <th>{{head.mealsendtime.text}}</th>
+                                <th>{{head.doneby.text}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each items:i}}
+                            <tr>
+                                <td><acinput lovs="{{~/page.lovs}}" field="{{mealspermenu}}" /></td>
+                                <td><acinput lovs="{{~/page.lovs}}" field="{{mealsstarttime}}" /></td>
+                                <td><acinput lovs="{{~/page.lovs}}" field="{{mealsendtime}}" /></td>
+                                <td><acinput lovs="{{~/page.lovs}}" field="{{doneby}}" /></td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            {{/dayzerogrid}}
+        </div>
+        <div>
+            <br />
+            <br />
+        </div>
+        <div>
+            {{#dayone}}
+            <div>
+                <h4 class="ac-sub-h4">{{name}}</h4>
+            </div>
+            <div>
+                <span>{{~/text('date', 'dayone')}}</span><acinput lovs="{{~/page.lovs}}" field="{{~/field('date', 0, 'dayone')}}" />
+            </div>
+            {{/dayone}}
+            {{#dayonegrid}}
+            <div>
+                <table class="ac-table">
+                    <thead>
+                        <tr>
+                            <th>{{head.mealspermenu.text}}</th>
+                            <th>{{head.scheduledtime.text}}</th>
+                            <th>{{head.mealsstarttime.text}}</th>
+                            <th>{{head.mealsendtime.text}}</th>
+                            <th>{{head.mealscompleted.text}}</th>
+                            <th>{{head.doneby.text}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each items:i}}
+                        <tr>
+                            <td><acinput lovs="{{~/page.lovs}}" field="{{mealspermenu}}" /></td>
+                            <td><acinput lovs="{{~/page.lovs}}" field="{{scheduledtime}}" /></td>
+                            <td><acinput lovs="{{~/page.lovs}}" field="{{mealsstarttime}}" /></td>
+                            <td><acinput lovs="{{~/page.lovs}}" field="{{mealsendtime}}" /></td>
+                            <td><acinput lovs="{{~/page.lovs}}" field="{{mealscompleted}}" /></td>
+                            <td><acinput lovs="{{~/page.lovs}}" field="{{doneby}}" /></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{/dayonegrid}}
+        </div>
+        <div>
+            <br />
+            <br />
+        </div>
+        <div>
+            {{#screen1summary}}
+                <div>
+                    {{head.comments.text}}
+                    <div class="ac-fullcontent">
+                        <acinput lovs="{{~/page.lovs}}" field="{{items[0].comments}}" />
+                    </div>
+                    <div class="text-right">
+                        <acinput lovs="{{~/page.lovs}}" field="{{items[0].markifcomments}}" />
+                    </div>
+                    <div>
+                        {{head.reviewedby.text}} : <acinput lovs="{{~/page.lovs}}" field="{{items[0].reviewedby}}" />
+                        &nbsp; &nbsp; &nbsp;
+                        <acinput lovs="{{~/page.lovs}}" field="{{items[0].reviewedrole}}" />
+                    </div>
+                </div>
+            {{/screen1summary}}
+        </div>
+    {{/page.formGroup}}
+</script>

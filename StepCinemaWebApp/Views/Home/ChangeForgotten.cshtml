@@ -1,0 +1,74 @@
+﻿@model CRFModels.Models.ForgotPasswordModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Reset Password";
+    ViewBag.SectionClass = "ac-login-section";
+}
+<div class="ac-login-area">
+    <style type="text/css">
+        .form-group label {
+            font-weight: normal;
+            text-align: left;
+            padding: 2px 5px;
+            margin: 0;
+        }
+        .form-group {
+            text-align: left;
+        }
+    </style>
+
+    <h3>
+        Reset Password
+    </h3>
+    <div style="height:60px;">
+
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.ValidationSummary()
+            </div>
+            <div class="col-xs-12">
+                @if (ViewBag.IsReady == "1")
+                {
+                    <div>
+                        @using (Html.BeginForm())
+                        {
+                            <div>
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.NewPassword)
+                                    <div class="ac-form-cell">
+                                        @Html.PasswordFor(x => x.NewPassword, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.NewPasswordAgain)
+                                    <div class="ac-form-cell">
+                                        @Html.PasswordFor(x => x.NewPasswordAgain, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="ac-form-cell2">
+                                    <button class="btn btn-primary btn-block" type="submit">Change Password</button>
+                                </div>
+                                <div class="ac-form-cell2">
+                                    <a href="#">Forgot your password</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div>Please follow email link</div>
+                }
+            </div>
+            <div class="col-xs-12">
+                Click <a href="@Url.Action("Index")">here</a> to login again.
+            </div>
+        </div>
+        <div style="height:60px;">
+
+        </div>
+
+    </div>
+</div>

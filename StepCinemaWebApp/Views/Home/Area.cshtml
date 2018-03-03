@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_SessionLayout.cshtml";
+    ViewBag.Title = "Recent Videos";
+}
+<h2>@ViewBag.Title</h2>
+@*<h3>@ViewBag.Message</h3>*@
+
+<p>Use this area to provide additional information.</p>
+<div class="row">
+    <div class="form-group col-md-3">
+        <div class="row">
+            <iframe width="200"
+                    height="100"
+                    src="http://www.youtube.com/embed/fxCEcPxUbYA"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div class="row">
+            <a href="@Url.Action("Watch")">Ilai</a>
+        </div>
+    </div>
+
+    <div class="form-group col-md-3">
+        <div class="row">
+            <video height="100" width="200">
+                <source src="~/Content/Video/Ilai_Sample.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="row">
+            <a href="@Url.Action("Watch")">Ilai</a>
+        </div>
+    </div>
+
+    <div class="form-group col-md-3">
+        <div class="row">
+            <video height="100" width="200">
+                <source src="~/Content/Video/EnthanUyirThozhi.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="row">
+            <a href="@Url.Action("Watch")">Ilai</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-3">
+        <div class="row">
+            <iframe width="200"
+                    height="100"
+                    src="http://www.youtube.com/embed/fxCEcPxUbYA?autoplay=0&showinfo=0&controls=0"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div class="row">
+            <a href="@Url.Action("Watch")">Ilai</a>
+        </div>
+    </div>
+
+    <div class="form-group col-md-3">
+        <div class="row">
+            <video height="100" width="200">
+                <source src="~/Content/Video/EnthanUyirThozhi.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="row">
+            <a href="@Url.Action("Watch")">Ilai</a>
+        </div>
+    </div>
+
+    <div class="form-group col-md-3">
+        <div class="row">
+            <video height="100" width="200">
+                <source src="~/Content/Video/Ilai_Sample.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="row">
+            <a href="@Url.Action("Watch")">Ilai</a>
+        </div>
+    </div>
+</div>

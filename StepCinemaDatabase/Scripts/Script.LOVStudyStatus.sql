@@ -1,0 +1,7 @@
+﻿Insert into [LOVStudyStatus] VALUES (1,'New',0)
+Insert into [LOVStudyStatus] VALUES (2,'First Entry',0)
+Insert into [LOVStudyStatus] VALUES (3,'First Entry Completed',0)
+Insert into [LOVStudyStatus] VALUES (4,'Second Entry',0)
+Insert into [LOVStudyStatus] VALUES (5,'Second Entry Completed',0)
+Insert into [LOVStudyStatus] VALUES (6,'Reviewed',0)
+Insert into [LOVStudyStatus] VALUES (7,'Locked',0)

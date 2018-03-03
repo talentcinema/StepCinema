@@ -1,0 +1,110 @@
+﻿@model CRFModels.Models.StudiesEditModel
+@{
+    Layout = "~/Views/Shared/_AddEditLayout.cshtml";
+    IEnumerable<SelectListItem> periodList = Model.PeriodList.Select(x => new SelectListItem() { Text = x.PeriodName, Value = x.PeriodId.ToString() });
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pageHeight =  $(document).height();
+        $(".pageHeight").css("height", pageHeight +"px");
+        @{
+            if(Model.studyPageMapping != null)
+            {
+                var result = @Html.Raw(Json.Encode(Model.studyPageMapping.FormGroupId));
+            }
+        }
+        var selectedVal = @Html.Raw(Json.Encode(Model.PeriodId));
+        $("#PeriodId").val(selectedVal);
+        //$("#chkPages").prop('checked', true)
+        $('#tblPageList input[type="checkbox"]').each(function () {
+            //alert($(this).val())
+            //$(this).prop('checked', true);
+        });
+    });
+</script>
+<div class="table-bordered titleHeader" style="margin-top:50px;">
+    <div>
+        <h3>Study Page Mapping</h3>
+    </div>
+</div>
+<div class="divBackColor" style="height:50px;padding-top:10px">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">@Html.Label("Study Name:", new { style = "font-size:15px" }) @Html.LabelForModel(Model.StudyName)</div>
+    <div class="col-md-3">@Html.Label("Study Number:", new { style = "font-size:15px" }) @Html.LabelForModel(Model.StudyNumber)</div>
+</div>
+<div class="pageHeight">
+    <div class="col-md-8 col-md-offset-2" style="background-color:white">
+        <div>
+            <div class="text-primary">
+                @ViewBag.Message
+            </div>
+
+            @using (Html.BeginForm(new { PeriodId = "" }))
+            {
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.HiddenFor(x => x.StudyId)
+                            @Html.HiddenFor(x => x.StudyNumber)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1 text-nowrap">
+                                @Html.Label("Select Period :")
+                            </div>
+                            <div class="col-md-3 pull-right">
+                                @Html.DropDownListFor(x => x.PeriodId, periodList, new
+                                {
+                                    @class = "form-control",
+                                    onchange = "SelectionChanged()"
+                                })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form - group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered" id="tblPageList">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Page Name</th>
+                                            <th>Configuration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{ foreach (var page in Model.PageList)
+                                            {
+                                                <tr>
+                                                    <td><input type="checkbox" id="chkPages" name="chkPages" value="@page.PageId" checked="@page.Active" /></td>
+                                                    <td>@page.PageName</td>
+                                                    <td><a href="@Url.Action("FieldMapping",new { studyNumber = Model.StudyNumber,studyName = Model.StudyName,pageName=@page.PageName,pageId=@page.PageId,periodId=@page.PeriodId })">Field Config</a></td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right col-md-7">
+                        <button class="btn btn-default" type="submit">Back</button>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function SelectionChanged() {
+        var periodId = $('#PeriodId').val();
+        var studyNumber = @Html.Raw(Json.Encode(Model.StudyNumber));
+        var url = '@Url.Action("AddEditPageMapping", "Studies")';
+        url += '?studyNumber=' + studyNumber + '&periodId=' + periodId;
+        window.location = url;
+    }
+</script>

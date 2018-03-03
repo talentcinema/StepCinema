@@ -1,0 +1,61 @@
+﻿<!--  field : (fieldId, type, value, lovId, unit, difference,) -->
+<!--  lovs : (fieldId, type, value, lovId, unit, difference,) -->
+<script type="text/html" id="acinputtemplate">
+    {{#if (field.type === 'static')}}
+    <span>{{field.value}}</span>
+    {{/if}}
+    {{#if (field.type === 'datetime')}}
+    <input type="text" class="ac-input ac-datetime" class-ac-diff="~/difference" class-ac-dirty="isdirty" value="{{field.value}}" data-ac-datetime="1" />
+    {{/if}}
+    {{#if (field.type === 'time')}}
+    <input type="text" class="ac-input ac-time" class-ac-diff="~/difference" class-ac-dirty="isdirty" value="{{field.value}}" data-ac-datetime="1" />
+    {{/if}}
+    {{#if (field.type === 'date')}}
+    <input type="text" class="ac-input ac-date" class-ac-diff="~/difference" class-ac-dirty="isdirty" value="{{field.value}}" data-ac-datetime="1" />
+    {{/if}}
+    {{#if (field.type === 'text')}}
+    <textarea value="{{field.value}}" class="ac-input ac-textarea" class-ac-diff="~/difference" class-ac-dirty="isdirty" data-ac-text="1"></textarea>
+    {{/if}}
+    {{#if (field.type === 'string')}}
+    <input type="text" class="ac-input ac-string" class-ac-diff="~/difference" class-ac-dirty="isdirty" value="{{field.value}}" data-ac-datetime="1" />
+    {{/if}}
+    {{#if (field.type === 'float')}}
+    <input type="text" class="ac-input ac-float" class-ac-diff="~/difference" class-ac-dirty="isdirty" value="{{field.value}}" data-ac-datetime="1" />
+    {{/if}}
+    {{#if (field.type === 'int')}}
+    <input type="text" class="ac-input ac-int" class-ac-diff="~/difference" class-ac-dirty="isdirty" value="{{field.value}}" data-ac-datetime="1" />
+    {{/if}}
+    {{#if (field.type === 'list')}}
+    <select value="{{field.value}}" class="ac-select" class-ac-diff="~/difference" class-ac-dirty="isdirty">
+        <option value="">[Select]</option>
+        {{#getLov(field.lovId)}}
+        <option value="{{key}}">{{text}}</option>
+        {{/getLov}}
+    </select>
+    {{/if}}
+    {{#if (field.type === 'list-radio')}}
+    <form>
+        {{#getLov(field.lovId)}}
+        <label class="ac-radio" class-ac-diff="~/difference">
+            <input type="radio" name="{{~/field.value}}" value="{{key}}">
+            <span>{{text}}</span>
+            <span>&nbsp;</span>
+        </label>
+        {{/getLov}}
+    </form>
+    {{/if}}
+    {{#if (field.type === 'multiple')}}
+        <acmultiple lovs="{{lovs}}" field="{{field}}" />
+    {{/if}}
+</script>
+<script type="text/html" id="acmultipletemplate">
+    <form>
+        {{#getLov(field.lovId)}}
+        <label class="ac-checkbox" class-ac-diff="~/difference">
+            <input type="checkbox" name="{{~/formValue}}" value="{{key}}">
+            <span>{{text}}</span>
+            <span>&nbsp;</span>
+        </label>
+        {{/getLov}}
+    </form>
+</script>

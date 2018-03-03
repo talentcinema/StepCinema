@@ -1,0 +1,45 @@
+﻿@model CRFModels.Models.CRFStatusModel
+@{
+    Layout = "~/Views/Shared/_SessionLayout.cshtml";
+}
+
+<div style="text-align: center;">
+    @if (Model.Status == 1)
+    {
+        using (Html.BeginForm())
+        {
+    <div>
+        <div>
+            <label>Subject Id : </label>
+            <span>@Model.SubjectId</span>
+        </div>
+        <div>
+            <label>Study Number : </label>
+            <span>@Model.StudyNumber</span>
+        </div>
+        <div>
+            <label>Site Id : </label>
+            <span>@Model.SiteId</span>
+        </div>
+        <div>
+            <label>Protocol Title : </label>
+            <span>@Model.ProtocolTitle</span>
+        </div>
+        <input type="hidden" name="status" value="@Model.Status" />
+    </div>
+    <div>
+        <a href="@Url.Action("List", "CRFStatus", new { id = ViewBag.StudyId })" class="btn btn-default">Cancel</a>
+        <button type="submit">Delete</button>
+    </div>
+        }
+    }
+    else
+    {
+        <div>
+            CRF Fom does not exist
+        </div>
+        <div>
+            <a href="@Url.Action("List", "CRFStatus", new { id = ViewBag.StudyId })" class="btn btn-default">Cancel</a>
+        </div>
+    }
+</div>

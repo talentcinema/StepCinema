@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CRF Application</title>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/ractive.js"></script>
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" / -->
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+</head>
+<body class="ac-dark-section">
+    <section class="container">
+        <div class="ac-section @(ViewBag.SectionClass ?? "")">
+            <div class="ac-section-row">
+                <div class="ac-section-msg-area">
+                    @RenderBody()
+                </div>
+                <div class="ac-section-img-area">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

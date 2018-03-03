@@ -1,0 +1,163 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+    <!--
+    vawbrf1	timepoint	Time point (in hours)		1	vawbrf	-100	static
+    vawbrf1	sheduledtime	Scheduled time(in hours)		1	vawbrf	-100	time
+    vawbrf1	subjectposition	subject's position		1	vawbrf	-100	text
+    vawbrf1	subjectidverified	Subject ID verified		1	vawbrf	-100	multiple
+    vawbrf1	bloodpressure	Blood pressure		1	vawbrf	-100	static
+    vawbrf1	systolic	Systolic		1	vawbrf	-100	text
+    vawbrf1	diastolic	Diastolic		1	vawbrf	-100	text
+    vawbrf1	unit	Unit		1	vawbrf	-100	static
+    vawbrf1	pulse	Pulse		1	vawbrf	-100	text
+    vawbrf1	unit	Unit		1	vawbrf	-100	static
+    vawbrf1	oraltemperature	Oral temperature		1	vawbrf	-100	text
+    vawbrf1	unit	Unit		1	vawbrf	-100	static
+    vawbrf1	timeanddate	Time and Date of vitals recorded		1	vawbrf	-100	datetime
+    vawbrf1	doneby	done by(sign and date)		1	vawbrf	-100	text
+    vawbrf2	additionalpoints	Additional vital time points, if required		1	vawbrf	-100	static
+    vawbrf2	codes	*Codes: A – Seated, B – Semi – reclined, C – Supine, D – Others (specify)		1	vawbrf	-100	static
+    vawbrf3	comments	Comments if any		1	vawbrf	-100	text
+    vawbrf3	commentsmarked	Mark the box, if additional comments are made		1	vawbrf	-100	multiple
+    vawbrf3	reviewedby	Reviewed by		1	vawbrf	-100	text
+    vawbrf3	reviewedbyrole	Reviewed by role		1	vawbrf	-100	list-radio
+    -->
+    {{#page.formGroup}}
+    {{#vawbrf1}}
+    <div>
+        <div>
+            <h4 class="ac-sub-h4">{{name}}</h4>
+        </div>
+    </div>
+    <div style="float:left;padding-right:40px;">
+        <table class="ac-table">
+            <thead>
+                <tr>
+                    <th rowspan="2">
+                        {{~/text('timepoint', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('sheduledtime', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('subjectposition', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('subjectidverified', 'vawbrf1')}}
+                    </th>
+                    <th colspan="2">
+                        {{~/text('bloodpressure', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('unit1', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('pulse', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('unit2', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('oraltemperature', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('unit3', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('subjectwell', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('timeanddate', 'vawbrf1')}}
+                    </th>
+                    <th rowspan="2">
+                        {{~/text('doneby', 'vawbrf1')}}
+                    </th>
+                </tr>
+                <tr>
+                    <th>{{~/text('systolic', 'vawbrf1')}}</th>
+                    <th>{{~/text('diastolic', 'vawbrf1')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ~/items('vawbrf1'):i}}
+                <tr>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('timepoint', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('sheduledtime', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectposition', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectidverified', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('systolic', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('diastolic', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        {{~/field('diastolic', i, 'vawbrf1').unit}}
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('pulse', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        {{~/field('pulse', i, 'vawbrf1').unit}}
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('oraltemperature', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        {{~/field('oraltemperature', i, 'vawbrf1').unit}}
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectwell', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('timeanddate', i, 'vawbrf1')}}" />
+                    </td>
+                    <td>
+                        <acinput lovs="{{~/page.lovs}}" field="{{~/field('doneby', i, 'vawbrf1')}}" />
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div style="clear:both;"></div>
+    {{/vawbrf1}}
+    {{#vawbrf2}}
+    <div>
+        {{~/text('codes', 'vawbrf2')}}
+    </div>
+    {{/vawbrf2}}
+    {{#vawbrf3}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('comments', 'vawbrf3')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'vawbrf3')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'vawbrf3')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewedby', 'vawbrf3')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedby', 0, 'vawbrf3')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedbyrole', 0, 'vawbrf3')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/vawbrf3}}
+    {{/page.formGroup}}
+</script>
+

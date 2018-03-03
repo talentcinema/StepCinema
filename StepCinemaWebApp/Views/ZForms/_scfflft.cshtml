@@ -1,0 +1,122 @@
+﻿<script type="text/html" id="templateforpage" data-tag="scr" data-vaid-values="sub,scr,reg,none">
+    {{#page.formGroup}}
+    <!--
+
+    scfflftf1	samplea	*Sample collected for Liver function test (ALT, AST and bilirubin)? 		1	scfflft	-100	list-radio
+    scfflftf1	samplestatic1	(Except for the subjects who are screened on check-in day)		1	scfflft	-100	static
+    scfflftf1	sampledate	Date and time of sample collection		1	scfflft	-100	datetime
+    scfflftf1	sampledoneby	Done by		1	scfflft	-100	dropdown
+    scfflftf1	sampleb	Repeat samples collected for Liver function test (ALT, AST and bilirubin),		1	scfflft	-100	list-radio
+    scfflftf1	samplebyes	If yes, fill the column below:		1	scfflft	-100	static
+    scfflftf2	slno	SL NO		1	scfflft	-100	static
+    scfflftf2	sampledate	Date and time of sample collection		1	scfflft	-100	datetime
+    scfflftf2	sampledoneby	Done By 		1	scfflft	-100	dropdown
+    scfflftf3	samplestatic1	Transcribed data from source document                                                              		1	scfflft	-100	static
+    scfflftf3	comments	Comments		1	scfflft	-100	text
+    scfflftf3	commentsmarked	Mark the box, if additional comments are made.		1	scfflft	-100	multiple
+    scfflftf3	reviewby 	Reviewed by		1	scfflft	-100	text
+    scfflftf3	reviewbyrole      	Reviewed (Principal Investigator,clinical Investigator,research physician)		1	scfflft	-100	list-radio
+
+            -->
+    {{#~/form('scfflftf1')}}
+    <div>
+        <h4 class="ac-sub-h4">{{name}}</h4>
+    </div>
+    <div>
+        <table style="width:100%">
+            <colgroup>
+                <col style="width:60%" />
+                <col style="width:40%" />
+            </colgroup>
+            <tr>
+                <td>
+                    1.&nbsp;{{~/text('samplea', 'scfflftf1')}}
+                    <br />{{~/text('samplestatic1', 'scfflftf1')}}
+                </td>
+                <td style="vertical-align:top;">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('samplea', 0, 'scfflftf1')}}" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table class="ac-table">
+            <thead>
+                <tr>
+                    <th>{{~/text('sampledate', 'scfflftf1')}}</th>
+                    <th>{{~/text('sampledoneby', 'scfflftf1')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('sampledate', 0, 'scfflftf1')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('sampledoneby', 0, 'scfflftf1')}}" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table style="width:100%">
+            <colgroup>
+                <col style="width:60%" />
+                <col style="width:40%" />
+            </colgroup>
+            <tr>
+                <td>
+                    2.&nbsp;{{~/text('sampleb', 'scfflftf1')}}
+                    <br />{{~/text('samplebyes', 'scfflftf1')}}
+                </td>
+                <td style="vertical-align:top;">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('sampleb', 0, 'scfflftf1')}}" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    {{/~/form}}
+    {{#~/form('scfflftf2')}}
+    <div>
+        <table class="ac-table">
+            <thead>
+                <tr>
+                    <th>{{~/text('slno', 'scfflftf2')}}</th>
+                    <th>{{~/text('sampledate', 'scfflftf2')}}</th>
+                    <th>{{~/text('sampledoneby', 'scfflftf2')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ~/items('scfflftf2'):i}}
+                <tr>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('slno', i, 'scfflftf2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('sampledate', i, 'scfflftf2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('sampledoneby', i, 'scfflftf2')}}" /></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/~/form}}
+    {{#~/form('scfflftf3')}}
+    <div>
+        <div>
+            {{~/text('samplestatic1', 'scfflftf3')}}
+        </div>
+        <div>
+            <div>
+                {{~/text('comments', 'scfflftf3')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'scfflftf3')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'scfflftf3')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewby', 'scfflftf3')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewby', 0, 'scfflftf3')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewbyrole', 0, 'scfflftf3')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/~/form}}
+    {{/page.formGroup}}
+</script>

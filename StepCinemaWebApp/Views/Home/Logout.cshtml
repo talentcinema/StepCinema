@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
+    ViewBag.SectionClass = "ac-login-section";
+}
+<div class="ac-login-area">
+    <h3>
+        You are logged out
+    </h3>
+    <div style="height:60px;">
+
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-xs-12">
+                You are logged out from the application.
+            </div>
+            <div class="col-xs-12">
+                Click <a href="@Url.Action("Index")">here</a> to login again.
+            </div>
+        </div>
+        <div style="height:60px;">
+
+        </div>
+
+    </div>
+</div>

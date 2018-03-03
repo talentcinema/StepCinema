@@ -1,0 +1,97 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+
+    <!--
+
+    soatwd01hpda1	subjectaccess	Did the subject access the washroom during 01 hour post drug administration		1	soatwd01hpda	-100	list-radio
+    soatwd01hpda2	ifyes	(If yes, fill the form below)		1	soatwd01hpda	-100	static
+    soatwd01hpda2	slno	S.No		1	soatwd01hpda	-100	static
+    soatwd01hpda2	accesswashroom	Access to the washroom		1	soatwd01hpda	-100	static
+    soatwd01hpda2	fromdate	from date and time		1	soatwd01hpda	-100	datetime
+    soatwd01hpda2	todate	upto date and time		1	soatwd01hpda	-100	datetime
+    soatwd01hpda2	supervision	supervision done by(sign and date)		1	soatwd01hpda	-100	text
+    soatwd01hpda3	comments	Comments if any		1	soatwd01hpda	-100	text
+    soatwd01hpda3	commentsmarked	Mark the box, if additional comments are made		1	soatwd01hpda	-100	multiple
+    soatwd01hpda3	reviewedby	Reviewed by		1	soatwd01hpda	-100	text
+    soatwd01hpda3	reviewedbyrole	Reviewed by role		1	soatwd01hpda	-100	list-radio
+
+    -->
+    {{#page.formGroup}}
+    {{#soatwd01hpda1}}
+    <div>
+        <h4 class="ac-sub-h4">{{name}}</h4>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>{{~/text('subjectaccess', 'soatwd01hpda1')}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectaccess', 0, 'soatwd01hpda1')}}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong>{{~/text('ifyes', 'soatwd01hpda1')}}</strong>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+    </div>
+    {{/soatwd01hpda1}}
+    {{#soatwd01hpda2}}
+    <div>
+        <table class="ac-table">
+            <colgroup>
+                <col />
+                <col />
+                <col />
+                <col />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th rowspan="2">{{~/text('slno', 'soatwd01hpda2')}}</th>
+                    <th colspan="2">{{~/text('accesswashroom', 'soatwd01hpda2')}}</th>
+                    <th rowspan="2">{{~/text('supervision', 'soatwd01hpda2')}}</th>
+                </tr>
+                <tr>
+                    <th>{{~/text('fromdate', 'soatwd01hpda2')}}</th>
+                    <th>{{~/text('todate', 'soatwd01hpda2')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ~/items('soatwd01hpda2'):i}}
+                <tr>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('slno', i, 'soatwd01hpda2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('fromdate', i, 'soatwd01hpda2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('todate', i, 'soatwd01hpda2')}}" /></td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('supervision', i, 'soatwd01hpda2')}}" /></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/soatwd01hpda2}}
+    {{#soatwd01hpda3}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('comments', 'soatwd01hpda3')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'soatwd01hpda3')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'soatwd01hpda3')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewedby', 'soatwd01hpda3')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedby', 0, 'soatwd01hpda3')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedbyrole', 0, 'soatwd01hpda3')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/soatwd01hpda3}}
+    {{/page.formGroup}}
+</script>

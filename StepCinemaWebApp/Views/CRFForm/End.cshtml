@@ -1,0 +1,53 @@
+﻿@model CRFModels.Models.CRFFormEndData
+@{
+    Layout = "~/Views/Shared/_SessionLayout.cshtml";
+}
+<div>
+    <div class="well">
+        You have come to the end of the data entry. Please click the following button to enter data in next level.
+    </div>
+    <div class="text-right" id="typediv" data-detail="@Model.Details.DetailsId">
+        <a id="backtolist" href="@Url.Action("List", "CRFStatus", new { id = Model.StudyId })" class="btn btn-default">Cancel</a>
+        @if (Model.Details.Status == (int)CRFModels.Constants.CRFDetailStatus.SaveStarted)
+        {
+            <button data-status="@((int)CRFModels.Constants.CRFDetailStatus.FirstEntryComplete)" type="button" class="btn btn-primary">Lock Primary Data Entry</button>
+        }
+        else if (Model.Details.Status == (int)CRFModels.Constants.CRFDetailStatus.FirstEntryComplete)
+        {
+            <button data-status="@((int)CRFModels.Constants.CRFDetailStatus.SaveStarted)" type="button" class="btn btn-primary">Unlock Primary Data Entry</button>
+            <button data-status="@((int)CRFModels.Constants.CRFDetailStatus.SecondEntryComplete)" type="button" class="btn btn-primary">Lock Secondary Data Entry</button>
+        }
+        else if (Model.Details.Status == (int)CRFModels.Constants.CRFDetailStatus.SecondEntryComplete)
+        {
+            <button data-status="@((int)CRFModels.Constants.CRFDetailStatus.FirstEntryComplete)" type="button" class="btn btn-primary">Unlock Secondary Data Entry</button>
+            <button data-status="@((int)CRFModels.Constants.CRFDetailStatus.Locked)" type="button" class="btn btn-primary">Lock All Data Entry</button>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#typediv").find("button[data-status]").on("click", function () {
+                SetDetailStatus($(this));
+            })
+        })
+        function SetDetailStatus(thisObj) {
+            var obj = {};
+            obj.detailsId = $("#typediv").data("detail");
+            obj.Status = thisObj.data("status")
+            $.ajax({
+                url: window.CRFBaseUrl + "CRFForm/SaveEnd",
+                type: "POST",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).done(function (data) {
+                console.log(JSON.stringify(data));
+                window.location.href = $("#backtolist").attr("href");
+            });
+        }
+
+    </script>
+}
+

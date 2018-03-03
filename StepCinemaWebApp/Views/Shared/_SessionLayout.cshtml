@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CRF Application</title>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/ractive.js"></script>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" / -->
+    <link rel="stylesheet" type="text/css" href="~/Content/SiteSession.css" />
+</head>
+<body>
+    <script type="text/javascript">
+        window.CRFBaseUrl = '@Url.Content("~/")';
+    </script>
+    <header>
+        <!--<div class="ac-header-area">
+        <div class="ac-row">
+            <div class="ac-menu-area">
+                <span class="ac-draw-menu" id="mainmenubutton">
+                    <em class="ac-first"></em>
+                    <em class="ac-second"></em>
+                    <em class="ac-third"></em>
+                </span>
+            </div>
+            <div class="ac-logo-area">
+                <h2>Tallent Show</h2>
+            </div>
+            <div class="ac-username-area">
+
+                <div class="dropdown">
+                    <button class="ac-plain-button" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>@Html.Action("LoggedInUser", "Home")</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right text-left" aria-labelledby="dropdownMenu1">
+                        <li><a href="@Url.Action("ChangeMyPassword", "Home")">Change Password</a></li>
+                        <li><a href="@Url.Action("Logout", "Home")">Logout</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>-->
+    </header>
+    @*<nav class="ac-nav" style="display:none;">
+        <div class="ac-nav-close pull-right">&times;</div>
+        <div class="clearfix"></div>
+        @Html.Action("Menus", "Home")
+    </nav>*@
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">TallentTube</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="@Url.Action("Area")">Home</a></li>
+                    @*<li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Page 1-1</a></li>
+                            <li><a href="#">Page 1-2</a></li>
+                            <li><a href="#">Page 1-3</a></li>
+                        </ul>
+                    </li>*@
+                    <li><a href="#">Video</a></li>
+                    <li><a href="#">Member</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="container ac-session-area11">
+        @RenderBody()
+    </section>
+    <footer>
+        &copy;TalentShow . All Rights reserved.
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", function (event) {
+
+                var $this = $(event.target)
+                var isNotMenu = $this.closest("nav.ac-nav").length == 0;
+                var isNotMenuIcon = $this.closest("#mainmenubutton").length == 0;
+
+                if (isNotMenu && isNotMenuIcon) {
+                    if ($("nav.ac-nav").is(":visible")) {
+                        $("nav.ac-nav").hide("slow");
+                    }
+                }
+            });
+            $("#mainmenubutton").on("click", function () {
+                $("nav.ac-nav").show("slow");
+            })
+            $("nav.ac-nav").find(".ac-nav-close").on("click", function () {
+                $("nav.ac-nav").hide("slow");
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

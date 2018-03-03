@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_SessionLayout.cshtml";
+    ViewBag.Title = "CRF List";
+}
+
+<h2 class="ac-table-h1">CRF Forms</h2>
+
+<div id="crfstatustable" data-study="@ViewBag.StudyId">
+
+</div>
+<div id="addeditpopup">
+    <div class="ac-popup">
+
+    </div>
+    <div class="ac-layer">
+
+    </div>
+</div>
+<script type="text/html" id="addedit">
+
+</script>
+<script type="text/html" id="fulltable">
+    <datatable tabledata="{{tabledata}}" editTitle="" editWidth="70px">
+        {{#partial filterArea}}
+        <form>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Subject Id</label>
+                            <input type="text" value="{{filter.subjectId}}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select value="{{filter.statusId}}" class="form-control">
+                                <option value="0">[Select Status]</option>
+                                <option value="1">Active</option>
+                                <option value="2">Locked</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group text-left">
+                        <label style="display:block">&nbsp;</label>
+                        <button type="button" class="btn btn-default" on-click="[ 'onFilter', filter ]">Apply</button>
+                        <a href="@Url.Action("Start", "CRFForm", new { study = ViewBag.StudyId })" class="btn btn-default">Add New</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {{/partial}}
+        {{#partial editArea}}
+        <div>
+            <a href="{{ '@Url.Action("Start", "CRFForm")' + '/' + rowValue.detailId + '?study=' + '@ViewBag.StudyId' }}" style="cursor:pointer;text-decoration:none;">&nbsp;<i class="text-primary glyphicon glyphicon-book"></i>&nbsp;</a>
+            <a href="{{ '@Url.Action("Delete", "CRFStatus")' + '/' + rowValue.detailId + '?study=' + '@ViewBag.StudyId' }}" style="cursor:pointer;text-decoration:none;">&nbsp;<i class="text-primary glyphicon glyphicon-trash"></i>&nbsp;</a>
+        </div>
+        {{/partial}}
+        {{#partial listCaption}}
+        <div style="padding-top:6px;">
+            Users list
+        </div>
+        {{/partial}}
+    </datatable>
+</script>
+
+@section scripts {
+    @Html.Partial("~/Views/Shared/_DataTable.cshtml")
+    <script type="text/javascript" src="~/Scripts/custom/crfstatus.list.js"></script>
+}

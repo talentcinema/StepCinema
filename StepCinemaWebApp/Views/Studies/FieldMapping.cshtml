@@ -1,0 +1,303 @@
+﻿@model CRFModels.Models.FieldMappingModel
+@{
+    Layout = "~/Views/Shared/_AddEditLayout.cshtml";
+    IEnumerable<SelectListItem> dataTypeList = Model.DataType.Select(x => new SelectListItem() { Text = x.Key, Value = x.Value });
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var listData = @Html.Raw(Json.Encode(Model.DataType));
+
+        $(".pageHeight").css("height", $(document).height() + "px");
+
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        var tbl = @Html.Raw(Json.Encode(Model.FormFields));
+
+        /// set selected valueFieldDataType in the table
+        $(tbl).each(function (key, val) {
+            var trId = val.FormId + "_" + val.FieldId;
+            var $option = $("#" + trId).find('select')[0].id;
+            $('#' + $option).val(val.FieldDataType);
+        });
+
+
+        $(".modelwindow").click(function () {
+            var eventId = event.target.id;
+            var periodId = @Html.Raw(Json.Encode(Model.PeriodId));
+            var studyNumber = @Html.Raw(Json.Encode(Model.StudyNumber));
+            var formGroupId = @Html.Raw(Json.Encode(Model.PageId))
+            $.ajax({
+                url: '@Url.Action("PreFilledFiled")',
+                type: 'GET',
+                data: { formId: eventId, periodId: periodId, studyNumber: studyNumber, formGroupId: formGroupId},
+                error: function (xhr) {
+                    //debugger
+                }
+            }).done(function (result) {
+                //debugger
+                $('#divModel').html(result);
+            });
+
+            modal.style.display = "block";
+        });
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // add row runtime
+        $(".addrow").click(function () {
+            var eventId = event.target.id;
+            var tableId = "#" + eventId.replace("btn", "tbl");
+            var select = $('<select />');
+            var row = $('<tr/>')
+
+            $(listData).each(function (index, data) {
+                $('<option />', { value: data.Value, text: data.Key }).appendTo(select);
+            });
+
+            $('<td/>').append($('<input/>', { type: 'text', name: tableId, maxlength:50 })).appendTo(row);
+            $('<td/>').append($('<input/>', { type: 'text', maxlength:200 })).appendTo(row);
+            $('<td/>').append($('<input/>', { type: 'text', maxlength:50 })).appendTo(row);
+            $('<td/>').append(select).appendTo(row);
+            $('<td/>').append($('<input/>', { type: 'checkbox' })).appendTo(row);
+            $('<td/>').append($('<input/>', { type: 'checkbox' })).appendTo(row);
+            $('<td/>').append($('<a/>', { href: 'javascript:void(0)' }).addClass('removeRow glyphicon glyphicon-trash')).appendTo(row);
+            $(tableId).append(row);
+
+            $(".removeRow").on('click', function () {
+                $(this).closest('tr').hide();
+            });
+        });
+    });
+
+    /// table data bind with model
+    function bindModel() {
+        var formFields = [];
+        var formConfig = [];
+        var tbl = @Html.Raw(Json.Encode(Model.FormConfig));
+        var frmSubmitError = false;
+        var whiteSpacePattern = /\s/;
+        var numericPattern = new RegExp("[^0-9]");
+        var errorMessage="";
+        $(tbl).each(function (key, val) {
+            var tblId = "#tbl" + val.FormId;
+            var divId = "#div" + val.FormId;
+
+            ///read formConfig model
+            var formId = val.FormId;
+            var display = $(divId + ' :input')[0].checked;
+            var disabled = $(divId + ' :input')[1].checked;
+            var periodId = $("#PeriodId").val();
+            var formGroupId = $("#PageId").val();
+            var formType = val.FormType;
+            var formRows = "";
+            if (formType == 'grid') {
+                formRows = $(divId + ' :input')[2].value;
+            } else {
+                formRows = val.Rows;
+            }
+
+            /// validate numeric only
+            if (numericPattern.test(formRows)) {
+                errorMessage = "Alphabets/WhiteSpace are not allowed in RowNo - " + formRows;
+                frmSubmitError = true;
+            }
+            ///binding to FormConfig model
+            formConfig.push(
+                {
+                FormId: formId,
+                PeriodId: periodId,
+                FormType: formType,
+                Rows: formRows,
+                Display: display,
+                Disabled: disabled,
+                }
+            );
+
+            ///read Formfield table
+            var fieldIdInput = [];
+            $(tblId + ' tbody tr').each(function () {
+                var feildId;
+                if ($(this).find("td").length > 6) {
+                    feildId = $(this).find("td input").eq(0)[0].value;
+                    var fieldLiteral = $(this).find("td input").eq(1)[0].value;
+                    var fieldExportName = $(this).find("td input").eq(2)[0].value;
+                } else {
+                    feildId = $(this).find("td").eq(0).html();
+                    var fieldLiteral = $(this).find("td input").eq(0)[0].value;
+                    var fieldExportName = $(this).find("td input").eq(1)[0].value;
+                }
+
+                /// validate whitespace
+                if (feildId.match(whiteSpacePattern)) {
+                    errorMessage += " \n Whitespaces are not allowed - " + feildId;
+                    frmSubmitError = true;
+                }
+                var fieldDataType = $(this).find("option:selected").val();
+                var disabled  = $(this).find('td input[type="checkbox"]')[0].checked;
+                var display = $(this).find('td input[type="checkbox"]')[1].checked;
+                var formGroupId = $("#PageId").val();
+                var periodId = $("#PeriodId").val();
+                var studyId = $("#StudyId").val();
+
+                ///validate duplicate fieldId
+                fieldIdInput.push(feildId);
+
+                ///binding to FormField Model
+                formFields.push(
+                    {
+                        Disabled: disabled,
+                        Display: display,
+                        FieldDataType: fieldDataType,
+                        FieldExportName: fieldExportName,
+                        FieldId: feildId,
+                        FieldLiteral: fieldLiteral,
+                        FieldType: feildId,
+                        FormGroupId: formGroupId,
+                        FormId: val.FormId,
+                        PeriodId: periodId,
+                        StudyId: studyId,
+                    }
+                );
+            });
+
+            /// validate duplicate fieldId
+            var sorted_arr = fieldIdInput.sort();
+            var results = [];
+            for (var i = 0; i < fieldIdInput.length - 1; i++) {
+                if (sorted_arr[i + 1] == sorted_arr[i]) {
+                    results.push(sorted_arr[i]);
+                }
+            }
+            if (results.length > 0) {
+                frmSubmitError = true;
+                errorMessage += " \n Duplicate fieldId found - " + results[0];
+                return false;
+            }
+
+        });
+
+        ///form submit to controller if no error
+        if (frmSubmitError) {
+            alert(errorMessage);
+            return false;
+        }
+        $("#FormFields").val(JSON.stringify(formFields));
+        $("#FormConfig").val(JSON.stringify(formConfig));
+        return true;
+    }
+</script>
+<div class="table-bordered titleHeader" style="margin-top:50px;">
+    <div>
+        <h3>Field Mapping</h3>
+        <!-- Trigger/Open The Modal -->
+    </div>
+</div>
+<div class="divBackColor" style="height:50px;padding-top:10px">
+
+    @Html.HiddenFor(x => x.PeriodId)
+    <div class="col-md-12">
+        <div class="col-md-offset-2">
+            @Html.Label("Study Name:", new { style = "font-size:15px" }) @Html.LabelForModel(Model.StudyName)
+            @Html.Label("Study Number:", new { style = "font-size:15px;padding-left:20px" }) @Html.LabelForModel(Model.StudyNumber)
+            @Html.Label("Page Name:", new { style = "font-size:15px;padding-left:20px" }) @Html.LabelForModel(Model.PageName)
+            @Html.Label("Period Name:", new { style = "font-size:15px;padding-left:20px" }) @Html.LabelForModel(Model.PeriodName)
+        </div>
+    </div>
+</div>
+<div class="col-md-offset-2">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.StudyName)
+        @Html.HiddenFor(x => x.PageName)
+        @Html.HiddenFor(x => x.PeriodName)
+        @Html.HiddenFor(x => x.PeriodId)
+        @Html.HiddenFor(x => x.StudyNumber)
+        @Html.HiddenFor(x => x.PageId)
+        @Html.HiddenFor(x => x.DataType);
+        @Html.HiddenFor(x => x.FormFields);
+        @Html.HiddenFor(x => x.FormConfig);
+        <div class="col-md-12 pageHeight" style="padding-top:30px">
+            @{ foreach (var page in Model.FormConfig)
+                {
+                    string divId = "div" + page.FormId;
+                    string txtId = "txt" + page.FormId;
+                    <div class="form-group">
+                        <div class="row col-md-9" id="@divId">
+                            <div class="col-md-7 text-nowrap">
+                                @Html.Label(@page.FormName)
+                                <input type="checkbox" id="@page.FormId" name="@page.FormId" value="disabled" checked="@page.Disabled" style="margin-left:50px" /> @Html.Label("Disabled")
+                                <input type="checkbox" id="@page.FormId" name="@page.FormId" value="display" checked="@page.Display" style="margin-left:50px" /> @Html.Label("Display")
+                            </div>
+                            @if (page.FormType == "grid")
+                            {
+                                <div class="text-nowrap pull-right">
+                                    @Html.Label("Rows")&nbsp;@Html.TextBox(@page.FormId, @page.Rows, new { style = "width:50px", @maxlength = "2" })
+                                    @Html.Hidden(@page.PeriodId.ToString())
+                                    <button class="btn-primary modelwindow" type="button" id="@page.FormId">Fill Data</button>
+                                </div>
+                            }
+                            else
+                            {
+                                string btnId = "btn" + page.FormId;
+                                <button type="button" class="btn-primary pull-right addrow" id="@btnId">Add More</button>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-9">
+                                @{string tblId = "tbl" + page.FormId;}
+                                <table class="table table-bordered" id="@tblId">
+                                    <thead>
+                                        <tr>
+                                            <th>Field Id</th>
+                                            <th>Field Literal</th>
+                                            <th>Export Name</th>
+                                            <th>Data Type</th>
+                                            <th>Disable</th>
+                                            <th>Hide</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var field in Model.FormFields.Where(x => x.FormId == page.FormId))
+                                        {
+                                            var id = @field.FormId + "_" + @field.FieldId;
+                                            <tr id="@id">
+                                                <td>@field.FieldId</td>
+                                                <td>@Html.TextBox(@id, @field.FieldLiteral, new { @maxlength = "200" })</td>
+                                                <td>@Html.TextBox(@id, @field.FieldExportName, new { @maxlength = "50" })</td>
+                                                <td>@Html.DropDownList("ddl" + @id, dataTypeList, new { @class = "form-group" })</td>
+                                                <td><input type="checkbox" id="@id" name="@id" value="@field.Disabled" checked="@field.Disabled" /></td>
+                                                <td><input type="checkbox" id="@id" name="@id" value="@field.Display" checked="@field.Display" /></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="text-right col-md-9">
+                <button class="btn btn-default" type="button" onclick="window.history.back()">Back</button>
+                <button class="btn btn-primary" type="submit" onclick="return bindModel()">Save</button>
+            </div>
+        </div>
+    }
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="divModel"></div>
+    </div>
+</div>

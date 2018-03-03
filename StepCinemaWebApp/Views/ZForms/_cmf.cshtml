@@ -1,0 +1,69 @@
+﻿<script type="text/html" id="templateforpage" data-tag="sub" data-vaid-values="sub,scr,reg,none">
+    <!--
+    cmf1	cardiacmonitoring	 Cardiac monitoring has been done to the subject from post dose drug administration to till 8 hours post dose.  		1	cmf	-100	list-radio
+    cmf1	abnormality	Any abnormality detected during cardiac monitoring.                                   		1	cmf	-100	list-radio
+    cmf1	aedocumented	If yes then AE has been documented for the subject.            		1	cmf	-100	list-radio
+    cmf1	monitoringdoneby	Cardiac monitoring done by (Sign and date)		1	cmf	-100	text
+    cmf2	comments	Comments if any		1	cmf	-100	text
+    cmf2	commentsmarked	Mark the box, if additional comments are made		1	cmf	-100	multiple
+    cmf2	reviewedby	Reviewed by		1	cmf	-100	text
+    cmf2	reviewedbyrole	Reviewed by role		1	cmf	-100	list-radio
+
+        -->
+    {{#page.formGroup}}
+    {{#cmf1}}
+    <div>
+        <h4 class="ac-sub-h4">{{name}}</h4>
+    </div>
+    <table>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>{{~/text('cardiacmonitoring', 'cmf1')}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('cardiacmonitoring', 0, 'cmf1')}}" /></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>{{~/text('abnormality', 'cmf1')}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('abnormality', 0, 'cmf1')}}" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>{{~/text('aedocumented', 'cmf1')}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('aedocumented', 0, 'cmf1')}}" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>{{~/text('monitoringdoneby', 'cmf1')}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('monitoringdoneby', 0, 'cmf1')}}" /></td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{/cmf1}}
+    {{#cmf2}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('comments', 'cmf2')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'cmf2')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'cmf2')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewedby', 'cmf2')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedby', 0, 'cmf2')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewedbyrole', 0, 'cmf2')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/cmf2}}
+    {{/page.formGroup}}
+</script>

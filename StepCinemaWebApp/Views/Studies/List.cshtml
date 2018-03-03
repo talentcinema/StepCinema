@@ -1,0 +1,97 @@
+﻿@model List<string>
+@{
+    Layout = "~/Views/Shared/_SessionLayout.cshtml";
+    ViewBag.Title = "Studies List";
+}
+
+<div>
+    <h2 class="ac-table-h1">Studies</h2>
+
+    <div id="studeistable">
+
+    </div>
+    <div id="addeditpopup">
+        <div class="ac-popup">
+
+        </div>
+        <div class="ac-layer">
+
+        </div>
+    </div>
+    <script type="text/html" id="addedit">
+
+    </script>
+    <script type="text/html" id="fulltable">
+        <datatable tabledata="{{tabledata}}" editTitle="" editWidth="70px">
+            {{#partial filterArea}}
+            <form>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Study Id</label>
+                                <input type="text" value="{{filter.studyNumber}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Study Name</label>
+                                <input type="text" value="{{filter.studyName}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Active</label>
+                                <select value="{{filter.active}}" class="form-control">
+                                    <option value="">[Select]</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group text-left">
+                            <label style="display:block">&nbsp;</label>
+                            <button type="button" class="btn btn-default" on-click="[ 'onFilter', filter ]">Apply</button>
+                            @if (!Request.Url.AbsolutePath.EndsWith("crf", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                <a href="@Url.Action("AddEdit")" class="btn btn-default">Add New</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/partial}}
+            {{#partial editArea}}
+            <div>
+                <a href="{{ '@Url.Action("AddEdit")'+ '?studyNumber=' + rowValue.studyNumber }}" style="cursor:pointer;text-decoration:none;">View</a> |
+
+                @if (Request.Url.AbsolutePath.EndsWith("crf", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    <span>
+                        <a href="{{ '@Url.Action("List", "CRFStatus")'  + '/' + rowValue.studyId }}" style="cursor:pointer;text-decoration:none;">View CRF</a>
+                    </span>
+                }
+                else
+                {
+                    <span>
+                        <a href="{{ '@Url.Action("AddEditPageMapping")'+ '?studyNumber=' + rowValue.studyNumber }}" style="cursor:pointer;text-decoration:none;">Configuration</a> |
+                        <a href="{{ '@Url.Action("AddEdit")'+ '?studyNumber=' + rowValue.studyNumber }}" style="cursor:pointer;text-decoration:none;"> Delete </a>
+                    </span>
+                }
+            </div>
+            {{/partial}}
+            {{#partial listCaption}}
+            <div style="padding-top:6px;">
+                Study Studies
+            </div>
+            {{/partial}}
+        </datatable>
+    </script>
+
+    @section scripts {
+        @Html.Partial("~/Views/Shared/_DataTable.cshtml")
+        <script type="text/javascript" src="~/Scripts/custom/studies.list.js"></script>
+    }
+</divs>

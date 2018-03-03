@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
+    ViewBag.SectionClass = "ac-login-section";
+}
+<div class="ac-login-area">
+    <h3>
+        Un authorized
+    </h3>
+    <div style="height:60px;">
+
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-xs-12">
+                You are not authorized to view the page.
+            </div>
+            <div class="col-xs-12">
+                Click <a href="@Url.Action("Index")">here</a> to login.
+            </div>
+            @if (ViewBag.IsLoggedIn)
+            {
+                <div>
+                    Or Click <a href="@Url.Action("Area")">here</a> to go to your home page
+                </div>
+            }
+        </div>
+        <div style="height:60px;">
+
+        </div>
+
+    </div>
+</div>

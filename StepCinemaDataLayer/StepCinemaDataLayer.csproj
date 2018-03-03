@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2981D66D-BD69-439D-8BCF-8E07DCCF63EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StepCinemaDataLayer</RootNamespace>
+    <AssemblyName>StepCinemaDataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TinyMapper, Version=2.0.0.40, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TinyMapper.2.0.8\lib\net45\TinyMapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseAccessClass.cs" />
+    <Compile Include="DataAccessBase.cs" />
+    <Compile Include="DataAccess\FormGroupLayer.cs" />
+    <Compile Include="DataAccess\SiteLayer.cs" />
+    <Compile Include="DataAccess\StatusLayer.cs" />
+    <Compile Include="DataAccess\StudiesLayer.cs" />
+    <Compile Include="DataAccess\UsersLayer.cs" />
+    <Compile Include="EntityModel\CRFDetail.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\FieldValue.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\FormConfig.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\FormField.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\FormGroup.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\FormGroupPeriod.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\GetNumberTable_Result.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\ListOfValue.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\ListOfValuesbkup.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\LOVStudyStatu.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Period.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\PrefilledField.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Role.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Site.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\StepCinemaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StepCinemaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\StepCinemaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\StepCinemaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StepCinemaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Study.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\User.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\UserRole.cs">
+      <DependentUpon>StepCinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="EntityModel\StepCinemaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StepCinemaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityModel\StepCinemaModel.edmx.diagram">
+      <DependentUpon>StepCinemaModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityModel\StepCinemaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StepCinemaModel.edmx</DependentUpon>
+      <LastGenOutput>StepCinemaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModel\StepCinemaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StepCinemaModel.edmx</DependentUpon>
+      <LastGenOutput>StepCinemaModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StepCinemaModels\StepCinemaModels.csproj">
+      <Project>{903ae8a7-135c-49af-bc4f-08704828b854}</Project>
+      <Name>StepCinemaModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

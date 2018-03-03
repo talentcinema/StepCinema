@@ -1,0 +1,116 @@
+﻿@model List<string>
+@{
+
+}
+
+<ul class="ac-menu-list">
+    @if (Model == null || Model.Count == 0)
+    {
+        <li>
+            <a href="@Url.Action("Logout", "Home")">
+                <span></span>
+                <span>Logout</span>
+            </a>
+        </li>
+    }
+    @foreach (string s in Model)
+    {
+        if (s == CRFModels.Constants.Roles.Administrator)
+        {
+            <li>
+                <a href="@Url.Action("AddEdit", "User")">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>Add New Member</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("List", "User")">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span>List Member</span>
+                </a>
+            </li>            
+        }
+        if (s == CRFModels.Constants.Roles.ApplicationAdministrator)
+        {
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span>Create Form Pages</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>List Form Pages</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span>Create Form Pages</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>List Form Pages</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span>Create Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>List Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span>Create Fields</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>List Fields</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>List Fields</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("AddEdit", "Studies")">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>Add New Studies</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("List", "Studies")">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span>List Studies</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("AddEdit", "FormGroup")">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>Add New FormGroup</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("List", "FormGroup")">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span>List FormGroup</span>
+                </a>
+            </li>
+        }
+
+    }
+</ul>

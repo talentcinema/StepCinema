@@ -1,0 +1,282 @@
+﻿body {
+    background-color: #fff;
+}
+
+.ac-session-area {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+header {
+    color: #fff;
+    background-color: rgb(54,70,93);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    z-index: 1000;
+}
+
+footer {
+    color: #fff;
+    background-color: rgb(54,70,93);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    font-size : 10px;
+    line-height: 10px;
+    text-align:center;
+    text-transform:uppercase;
+    z-index: 1000;
+}
+
+.ac-menu-area, .ac-logo-area, .ac-username-area {
+    padding: 5px;
+}
+    .ac-logo-area {
+        text-align: center;
+    } 
+    .ac-username-area {
+        text-align: right;
+    }
+    .ac-logo-area img {
+        height: 25px;
+    }
+
+.ac-draw-menu {
+    display:inline-block;
+    width: 24px;
+    position:relative;
+    height: 24px;
+    overflow:hidden;
+    vertical-align:middle;
+    cursor: pointer;
+}
+    .ac-draw-menu .ac-first, .ac-draw-menu .ac-second, .ac-draw-menu .ac-third {
+        display: block;
+        background-color: #fff;
+        width: 24px;
+        height:2px;
+        margin:5px 0px;
+        overflow:hidden;
+    }
+
+.ac-plain-button {
+    border:none;
+    background:transparent;
+    color: #fff;
+}
+    .ac-plain-button .caret {
+        color: #fff;
+        border-top-color: #fff;
+    }
+
+.ac-nav {
+    color: #fff;
+    background-color: #36465d; /* rgb(54,70,93); */
+    width: 230px;
+    position: fixed;
+    overflow-x: visible;
+    overflow-y: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border: none;
+    box-shadow: 0 0 3px #000;
+    z-index: 1500;
+    border-right: 5px solid #4c5d79;
+    margin:0;
+    padding:0;
+}
+.ac-nav-close {
+    padding:20px;
+    text-align: right;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+nav ul.ac-menu-list {
+    display:block;
+    list-style:none;
+    margin: 0 0 0 30px;
+    padding:0;
+}
+
+    nav ul.ac-menu-list li {
+        display:block;
+        padding: 2px 0;
+        margin: 0;
+    }
+
+        nav ul.ac-menu-list li a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            padding: 5px;
+            border:none;
+            margin:0;
+            overflow:hidden;
+            box-sizing:border-box;
+        }
+
+            nav ul.ac-menu-list li a:hover {
+                color: #467169;
+                border-right: 5px solid #467169;
+            }
+
+            /* media queries */
+            @media(min-width:768px) {
+                .ac-header-area {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .ac-row {
+        display: table-row;
+    }
+
+    .ac-menu-area, .ac-logo-area, .ac-username-area {
+        display: table-cell;
+        vertical-align: middle;
+        text-align:center;
+        padding: 10px;
+    }
+
+    .ac-menu-area, .ac-username-area {
+        width: 30%;
+        padding: 10px 20px;
+    }
+
+    .ac-menu-area {
+        text-align: left;
+    }
+
+    .ac-logo-area {
+        text-align: center;
+    }
+
+    .ac-username-area {
+        text-align: right;
+    }
+
+    .ac-logo-area img {
+        height: 40px;
+    }
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.btn {
+    border-radius: 2px;
+}
+
+.ac-sortable .ac-sort-click {
+    cursor: pointer;
+}
+
+.ac-table.table thead, .ac-table.table tbody, .ac-table.table tr {
+    border: none;
+}
+.ac-table {
+    table-layout: fixed;
+    empty-cells: show;
+    border : 1px solid #bbb;
+    border-collapse:collapse;
+    margin: 3px 0;
+}
+.ac-table td, .ac-table th {
+    border: 1px solid #bbb;
+    padding: 5px 7px; 
+}
+
+.ac-table thead {
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(220,220,220,1) 100%);
+}
+
+/* a fix for padding od column-md-6 */
+
+.ac-filter {
+    margin: 0 -15px;
+}
+
+.ac-table-h1 {
+    margin:0 0 20px 0;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid #bbb;
+}
+.ac-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    border: 1px solid #ccc;
+}
+/*-----custom style----------*/
+.titleHeader {
+    box-shadow: 0px 5px #ede8e8;
+    text-align:center;
+}
+
+.subTitle {
+    border-bottom: 2px solid #d7d3d3;
+}
+
+.divBackColor {
+    margin-top: 5px;
+    height: 100%;
+    background: #f0e68c;
+    background-color: #f6f2f2;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-dialog,
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 85%;
+    height: 80%;
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    /*max-height: calc(100% - 120px);*/
+    overflow-y: scroll;
+}
+
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }

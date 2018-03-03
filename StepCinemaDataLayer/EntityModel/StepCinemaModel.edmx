@@ -1,0 +1,699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StepCinemaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CRFDetails">
+          <Key>
+            <PropertyRef Name="DetailsId" />
+          </Key>
+          <Property Name="DetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudyId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ScreeningNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RegisteredNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="ProtocoTitle" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="FieldValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudyId" Type="int" Nullable="false" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+          <Property Name="FormGroupId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowIndex" Type="int" Nullable="false" />
+          <Property Name="EntryType" Type="int" Nullable="false" />
+          <Property Name="FieldValue" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="FormConfig">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="FormId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+          <Property Name="FormGroupId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudyId" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" />
+          <Property Name="FormType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Rows" Type="int" Nullable="false" />
+          <Property Name="Display" Type="bit" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormFields">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="FormId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldLiteral" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FieldExportName" Type="varchar" MaxLength="50" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+          <Property Name="FormGroupId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudyId" Type="int" Nullable="false" />
+          <Property Name="FieldDataType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FieldType" Type="varchar" MaxLength="20" />
+          <Property Name="FieldMandatory" Type="bit" Nullable="false" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Display" Type="bit" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+          <Property Name="Unit" Type="varchar" MaxLength="20" />
+          <Property Name="LOVId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FormGroup">
+          <Key>
+            <PropertyRef Name="FormGroupId" />
+          </Key>
+          <Property Name="FormGroupId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormGroupName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormGroupPeriods">
+          <Key>
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="FormGroupId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" />
+          <Property Name="StudyId" Type="int" Nullable="false" />
+          <Property Name="PageRef" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListOfValues">
+          <Key>
+            <PropertyRef Name="LOVId" />
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="LOVId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRFDatabaseNew.dbo.ListOfValuesbkup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ListOfValuesbkup">
+          <Key>
+            <PropertyRef Name="LOVId" />
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="LOVId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="temp" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LOVStudyStatus">
+          <Key>
+            <PropertyRef Name="StudyStatusId" />
+          </Key>
+          <Property Name="StudyStatusId" Type="int" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Periods">
+          <Key>
+            <PropertyRef Name="PeriodId" />
+          </Key>
+          <Property Name="PeriodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PeriodName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrefilledFields">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="StudyId" />
+            <PropertyRef Name="RowIndex" />
+          </Key>
+          <Property Name="FormId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+          <Property Name="FormGroupId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudyId" Type="int" Nullable="false" />
+          <Property Name="RowIndex" Type="int" Nullable="false" />
+          <Property Name="FieldValue" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Sites">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SiteName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Studies">
+          <Key>
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="StudyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudyNumber" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StudyName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NoOfPeriods" Type="int" Nullable="false" />
+          <Property Name="SiteId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="StudyStaus" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varbinary(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="GetNumberTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="number" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="StepCinemaModelStoreContainer">
+          <EntitySet Name="CRFDetails" EntityType="Self.CRFDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldValues" EntityType="Self.FieldValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormConfig" EntityType="Self.FormConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormFields" EntityType="Self.FormFields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormGroup" EntityType="Self.FormGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormGroupPeriods" EntityType="Self.FormGroupPeriods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListOfValues" EntityType="Self.ListOfValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOVStudyStatus" EntityType="Self.LOVStudyStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Periods" EntityType="Self.Periods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrefilledFields" EntityType="Self.PrefilledFields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sites" EntityType="Self.Sites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Studies" EntityType="Self.Studies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListOfValuesbkup" EntityType="Self.ListOfValuesbkup" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListOfValuesbkup].[LOVId] AS [LOVId], 
+    [ListOfValuesbkup].[Key] AS [Key], 
+    [ListOfValuesbkup].[Value] AS [Value], 
+    [ListOfValuesbkup].[Order] AS [Order], 
+    [ListOfValuesbkup].[Active] AS [Active], 
+    [ListOfValuesbkup].[temp] AS [temp]
+    FROM [dbo].[ListOfValuesbkup] AS [ListOfValuesbkup]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StepCinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="GetNumberTable_Result">
+          <Property Name="id" Type="Int32" />
+        </ComplexType>
+        <EntityType Name="CRFDetail">
+          <Key>
+            <PropertyRef Name="DetailsId" />
+          </Key>
+          <Property Name="DetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudyId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ScreeningNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegisteredNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="ProtocoTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FieldValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyId" Type="Int32" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="FormGroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FormId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowIndex" Type="Int32" Nullable="false" />
+          <Property Name="EntryType" Type="Int32" Nullable="false" />
+          <Property Name="FieldValue1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FormConfig">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="FormId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FormName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="FormGroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyId" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="FormType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rows" Type="Int32" Nullable="false" />
+          <Property Name="Display" Type="Boolean" Nullable="false" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormField">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="FormId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldLiteral" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldExportName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="FormGroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyId" Type="Int32" Nullable="false" />
+          <Property Name="FieldDataType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FieldMandatory" Type="Boolean" Nullable="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Display" Type="Boolean" Nullable="false" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LOVId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FormGroup">
+          <Key>
+            <PropertyRef Name="FormGroupId" />
+          </Key>
+          <Property Name="FormGroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FormGroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormGroupPeriod">
+          <Key>
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="FormGroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="StudyId" Type="Int32" Nullable="false" />
+          <Property Name="PageRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListOfValue">
+          <Key>
+            <PropertyRef Name="LOVId" />
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="LOVId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LOVStudyStatu">
+          <Key>
+            <PropertyRef Name="StudyStatusId" />
+          </Key>
+          <Property Name="StudyStatusId" Type="Int32" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="PeriodId" />
+          </Key>
+          <Property Name="PeriodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeriodName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrefilledField">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="PeriodId" />
+            <PropertyRef Name="FormGroupId" />
+            <PropertyRef Name="StudyId" />
+            <PropertyRef Name="RowIndex" />
+          </Key>
+          <Property Name="FormId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="FormGroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyId" Type="Int32" Nullable="false" />
+          <Property Name="RowIndex" Type="Int32" Nullable="false" />
+          <Property Name="FieldValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SiteName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Study">
+          <Key>
+            <PropertyRef Name="StudyId" />
+          </Key>
+          <Property Name="StudyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudyNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NoOfPeriods" Type="Int32" Nullable="false" />
+          <Property Name="SiteId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyStaus" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListOfValuesbkup">
+          <Key>
+            <PropertyRef Name="LOVId" />
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="LOVId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="temp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="StepCinemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CRFDetails" EntityType="Self.CRFDetail" />
+          <EntitySet Name="FieldValues" EntityType="Self.FieldValue" />
+          <EntitySet Name="FormConfigs" EntityType="Self.FormConfig" />
+          <EntitySet Name="FormFields" EntityType="Self.FormField" />
+          <EntitySet Name="FormGroups" EntityType="Self.FormGroup" />
+          <EntitySet Name="FormGroupPeriods" EntityType="Self.FormGroupPeriod" />
+          <EntitySet Name="ListOfValues" EntityType="Self.ListOfValue" />
+          <EntitySet Name="LOVStudyStatus" EntityType="Self.LOVStudyStatu" />
+          <EntitySet Name="Periods" EntityType="Self.Period" />
+          <EntitySet Name="PrefilledFields" EntityType="Self.PrefilledField" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Sites" EntityType="Self.Site" />
+          <EntitySet Name="Studies" EntityType="Self.Study" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="ListOfValuesbkups" EntityType="Self.ListOfValuesbkup" />
+          <FunctionImport Name="GetNumberTable" IsComposable="true" ReturnType="Collection(StepCinemaModel.GetNumberTable_Result)">
+            <Parameter Name="number" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StepCinemaModelStoreContainer" CdmEntityContainer="StepCinemaEntities">
+          <EntitySetMapping Name="CRFDetails">
+            <EntityTypeMapping TypeName="StepCinemaModel.CRFDetail">
+              <MappingFragment StoreEntitySet="CRFDetails">
+                <ScalarProperty Name="DetailsId" ColumnName="DetailsId" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ScreeningNo" ColumnName="ScreeningNo" />
+                <ScalarProperty Name="RegisteredNo" ColumnName="RegisteredNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProtocoTitle" ColumnName="ProtocoTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValues">
+            <EntityTypeMapping TypeName="StepCinemaModel.FieldValue">
+              <MappingFragment StoreEntitySet="FieldValues">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="FormGroupId" ColumnName="FormGroupId" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="RowIndex" ColumnName="RowIndex" />
+                <ScalarProperty Name="EntryType" ColumnName="EntryType" />
+                <ScalarProperty Name="FieldValue1" ColumnName="FieldValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormConfigs">
+            <EntityTypeMapping TypeName="StepCinemaModel.FormConfig">
+              <MappingFragment StoreEntitySet="FormConfig">
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="FormGroupId" ColumnName="FormGroupId" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="Rows" ColumnName="Rows" />
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormFields">
+            <EntityTypeMapping TypeName="StepCinemaModel.FormField">
+              <MappingFragment StoreEntitySet="FormFields">
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="FieldLiteral" ColumnName="FieldLiteral" />
+                <ScalarProperty Name="FieldExportName" ColumnName="FieldExportName" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="FormGroupId" ColumnName="FormGroupId" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="FieldDataType" ColumnName="FieldDataType" />
+                <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+                <ScalarProperty Name="FieldMandatory" ColumnName="FieldMandatory" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="LOVId" ColumnName="LOVId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormGroups">
+            <EntityTypeMapping TypeName="StepCinemaModel.FormGroup">
+              <MappingFragment StoreEntitySet="FormGroup">
+                <ScalarProperty Name="FormGroupId" ColumnName="FormGroupId" />
+                <ScalarProperty Name="FormGroupName" ColumnName="FormGroupName" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormGroupPeriods">
+            <EntityTypeMapping TypeName="StepCinemaModel.FormGroupPeriod">
+              <MappingFragment StoreEntitySet="FormGroupPeriods">
+                <ScalarProperty Name="FormGroupId" ColumnName="FormGroupId" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="PageRef" ColumnName="PageRef" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListOfValues">
+            <EntityTypeMapping TypeName="StepCinemaModel.ListOfValue">
+              <MappingFragment StoreEntitySet="ListOfValues">
+                <ScalarProperty Name="LOVId" ColumnName="LOVId" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOVStudyStatus">
+            <EntityTypeMapping TypeName="StepCinemaModel.LOVStudyStatu">
+              <MappingFragment StoreEntitySet="LOVStudyStatus">
+                <ScalarProperty Name="StudyStatusId" ColumnName="StudyStatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periods">
+            <EntityTypeMapping TypeName="StepCinemaModel.Period">
+              <MappingFragment StoreEntitySet="Periods">
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="PeriodName" ColumnName="PeriodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrefilledFields">
+            <EntityTypeMapping TypeName="StepCinemaModel.PrefilledField">
+              <MappingFragment StoreEntitySet="PrefilledFields">
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="FormGroupId" ColumnName="FormGroupId" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="RowIndex" ColumnName="RowIndex" />
+                <ScalarProperty Name="FieldValue" ColumnName="FieldValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="StepCinemaModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="StepCinemaModel.Site">
+              <MappingFragment StoreEntitySet="Sites">
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studies">
+            <EntityTypeMapping TypeName="StepCinemaModel.Study">
+              <MappingFragment StoreEntitySet="Studies">
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="StudyNumber" ColumnName="StudyNumber" />
+                <ScalarProperty Name="StudyName" ColumnName="StudyName" />
+                <ScalarProperty Name="NoOfPeriods" ColumnName="NoOfPeriods" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="StudyStaus" ColumnName="StudyStaus" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="StepCinemaModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="StepCinemaModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListOfValuesbkups">
+            <EntityTypeMapping TypeName="StepCinemaModel.ListOfValuesbkup">
+              <MappingFragment StoreEntitySet="ListOfValuesbkup">
+                <ScalarProperty Name="LOVId" ColumnName="LOVId" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="temp" ColumnName="temp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="StepCinemaModel.Store.GetNumberTable" FunctionImportName="GetNumberTable">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StepCinemaModel.GetNumberTable_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

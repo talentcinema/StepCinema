@@ -1,0 +1,93 @@
+﻿<script type="text/html" id="templateforpage" data-tag="scr" data-vaid-values="sub,scr,reg,none">
+    <!--
+    pccf1	subjectIDverified	Subject ID verified		1	pccf	-100	list-radio
+    pccf2	slno	SL No		1	pccf	-100	static
+    pccf2	subjectdetails	Protocol compliance confirmation 		1	pccf	-100	static
+    pccf2	yesno	Yes or  No		1	pccf	-100	list-radio
+    pccf3	serumtest	Female subject tested negative for serum pregnancy test.* 		1	pccf	-100	list-radio
+    pccf3	samplestatic1	Transcribed data from source document    		1	pccf	-100	static
+    pccf4	doneby	Done by		1	pccf	-100	text
+    pccf4	comments	comments if any		1	pccf	-100	text
+    pccf4	commentsmarked	Mark the box, if additional comments are made.		1	pccf	-100	multiple
+    pccf4	reviewby	Reviewed by		1	pccf	-100	text
+    pccf4	reviewbyrole      	Reviewed (Principal Investigator,clinical Investigator,research physician)		1	pccf	-100	list-radio
+        -->
+    {{#page.formGroup}}
+    {{#pccfques}}
+    <div>
+        <h4 class="ac-sub-h4">{{name}}</h4>
+    </div>
+    <table style="width:100%" class="ac-table">
+        <colgroup>
+            <col style="width:40px;" />
+            <col style="width:80%;" />
+            <col />
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td>{{~/text('subjectidverified', 'pccf1')}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('subjectidverified', 0, 'pccf1')}}" /></td>
+            </tr>
+            {{#each ~/order('pccfques'):i}}
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{~/text(this, 'pccfques')}}</td>
+                    <td><acinput lovs="{{~/page.lovs}}" field="{{~/field(this, 0, 'pccfques')}}" /></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/pccfques}}
+    {{#pccf3}}
+    <div>
+        <div>
+            <br />
+            <br />
+            <br />
+        </div>
+        <strong>{{name}}</strong>
+        <table style="width:auto;">
+            <colgroup>
+                <col />
+                <col />
+            </colgroup>
+            <tr>
+                <td>{{~/text('serumtest', 'pccf3')}}</td>
+                <td><acinput lovs="{{~/page.lovs}}" field="{{~/field('serumtest', 0, 'pccf3')}}" /></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        {{~/text('samplestatic1', 'pccf3')}}
+    </div>
+    {{/pccf3}}
+    {{#pccf4}}
+    <div>
+        <br />
+        <br />
+    </div>
+    <div>
+        <div>
+            <div>
+                {{~/text('doneby', 'pccf4')}} &nbsp; <acinput lovs="{{~/page.lovs}}" field="{{~/field('doneby', 0, 'pccf4')}}" />
+            </div>
+            <div>
+                {{~/text('comments', 'pccf4')}}
+                <div class="ac-fullcontent">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('comments', 0, 'pccf4')}}" />
+                </div>
+                <div class="text-right">
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('commentsmarked', 0, 'pccf4')}}" />
+                </div>
+                <div>
+                    {{~/text('reviewby', 'pccf4')}} : <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewby', 0, 'pccf4')}}" />
+                    &nbsp; &nbsp; &nbsp;
+                    <acinput lovs="{{~/page.lovs}}" field="{{~/field('reviewbyrole', 0, 'pccf4')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/pccf4}}
+    {{/page.formGroup}}
+</script>
